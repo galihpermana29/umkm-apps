@@ -245,21 +245,21 @@ nav {
    display: grid;
    position: fixed;
    /* top: 0; */
-   bottom: 0;
-   right: 0;
-   left: 0;
-   padding: 10px;
+   bottom: 5px;
+   right: 15px;
+   left: 15px;
+   padding: 0 5px;
+   height: 51px;
    grid-template-columns: repeat(4, minmax(50px, 60px));
    justify-content: space-between;
    justify-items: center;
    align-items: center;
-   border-top-left-radius: 5px;
-   border-top-right-radius: 5px;
+   /* border-top-left-radius: 5px;
+   border-top-right-radius: 5px; */
+   border-radius: 30px;
 }
 
-nav .icon {
-   /* background-color: white; */
-}
+
 
 nav svg {
    color: white;
