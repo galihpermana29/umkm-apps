@@ -196,7 +196,7 @@ input:focus {
 }
 
 .satu {
-   background-image: url('img/kerajinanimg.png');
+   background-image: url('../img/kerajinanimg.png');
    background-size: cover;
 }
 
@@ -213,11 +213,11 @@ input:focus {
 }
 
 .dua {
-   background-image: url('img/bahanpanganimg.png');
+   background-image: url('../img/bahanpanganimg.png');
    background-size: cover;
 }
 
 .tiga {
-   background-image: url('img/jasaimg.png');
+   background-image: url('../img/jasaimg.png');
    background-size: cover;
 }
