@@ -10,7 +10,7 @@ function fetching(name) {
 				container.innerHTML = this.response;
 				getKategoriElements();
 				if (name === 'kerajinan') {
-					insertCardItems();
+					// insertCardItems();
 				}
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
