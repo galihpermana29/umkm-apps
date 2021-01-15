@@ -28,7 +28,7 @@ function fetching(name) {
 		if (icon.dataset.name === name) {
 			i.style.color = 'white';
 		} else {
-         i.style.color = '#c8c9fc'
+         i.style.color = '#9394d6'
 		}
 	});
 	xhr.open('GET', `./pages/${name}.html`);
