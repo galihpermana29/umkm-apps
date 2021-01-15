@@ -20,7 +20,7 @@ function fetching(name) {
 	// console.log(name)
 	if (window.location.hash == '' && name === undefined) {
 		name = 'home';
-		// console.log('t')
+		console.log('t')
 	}
 
 	icons.forEach((icon) => {
