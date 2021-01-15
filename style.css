@@ -5,6 +5,8 @@
 * {
 	padding: 0;
 	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -18,33 +20,44 @@ body {
 	margin: 20px auto;
 }
 
-
 /* navbar */
 
 nav {
-   background-color: #4649a0;
-   display: grid;
-   position: fixed;
-   /* top: 0; */
-   bottom: 5px;
-   right: 15px;
-   left: 15px;
-   padding: 0 5px;
-   height: 51px;
-   grid-template-columns: repeat(4, minmax(50px, 60px));
-   justify-content: space-between;
-   justify-items: center;
-   align-items: center;
-   /* border-top-left-radius: 5px;
+	background-color: #4649a0;
+	display: grid;
+	position: fixed;
+	/* top: 0; */
+	bottom: 5px;
+	right: 15px;
+	left: 15px;
+	padding: 0 5px;
+	height: 51px;
+	grid-template-columns: repeat(4, minmax(50px, 60px));
+	justify-content: space-between;
+	justify-items: center;
+	align-items: center;
+	/* border-top-left-radius: 5px;
    border-top-right-radius: 5px; */
-   border-radius: 30px;
+	border-radius: 30px;
 }
 
-
-
 nav svg {
-   color: #9394d6;
-   /* background-color: red; */
-   /* fill: none; */
-   transition: .3s ease all;
+	color: #9394d6;
+	/* background-color: red; */
+	/* fill: none; */
+	transition: 0.3s ease all;
+}
+
+button,
+textarea,
+input,
+select,
+a {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
