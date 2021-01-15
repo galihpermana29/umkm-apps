@@ -1,4 +1,5 @@
 const container = document.querySelector('.container');
+const icons = document.querySelectorAll('.icon');
 
 function fetching(name) {
 	let xhr = new XMLHttpRequest();
@@ -22,13 +23,20 @@ function fetching(name) {
 		// console.log('t')
 	}
 
+	icons.forEach((icon) => {
+		let i = icon.querySelector('svg');
+		if (icon.dataset.name === name) {
+			i.style.color = 'white';
+		} else {
+         i.style.color = '#c8c9fc'
+		}
+	});
 	xhr.open('GET', `./pages/${name}.html`);
 	xhr.send();
 }
 
 fetching();
 
-const icons = document.querySelectorAll('.icon');
 // console.log(icons)
 icons.forEach((icon) => {
 	icon.addEventListener('click', (e) => {
@@ -42,9 +50,9 @@ function getKategoriElements() {
 	kategoriCardElements.forEach((cardEl) => {
 		cardEl.addEventListener('click', (e) => {
 			let nameCard = cardEl.dataset.kategori;
-         // console.log(dataset);
-         e.preventDefault();
-         fetching(nameCard)
+			// console.log(dataset);
+			e.preventDefault();
+			fetching(nameCard);
 		});
 	});
 }

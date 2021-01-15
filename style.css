@@ -42,5 +42,8 @@ nav {
 
 
 nav svg {
-   color: white;
+   color: #c8c9fc;
+   /* background-color: red; */
+   /* fill: none; */
+   transition: .3s ease all;
 }
