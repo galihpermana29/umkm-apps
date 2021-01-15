@@ -31,7 +31,7 @@ function fetching(name) {
          i.style.color = '#9394d6'
 		}
 	});
-	xhr.open('GET', `./pages/home.html`);
+	xhr.open('GET', `./pages/${name}.html`);
 	xhr.send();
 }
 
