@@ -6,35 +6,45 @@ function fetching(name) {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
-            // console.log(this.response);
-            appendToBody(this.response)
+				// console.log(this.response);
+				// appendToBody(this.response);
+				container.innerHTML = this.response;
+				getKategoriElements();
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
 			}
 		}
-   };
-   // console.log(name)
-   if(window.location.hash == "" && name === undefined){
-      name = 'home';
-      // console.log('t')
-   }
-   
-   xhr.open('GET', `./${name}.html`)
-   xhr.send();
+	};
+
+	// console.log(name)
+	if (window.location.hash == '' && name === undefined) {
+		name = 'home';
+		// console.log('t')
+	}
+
+	xhr.open('GET', `./pages/${name}.html`);
+	xhr.send();
 }
 
 fetching();
 
 const icons = document.querySelectorAll('.icon');
 // console.log(icons)
-icons.forEach(icon => {
-   icon.addEventListener('click', (e) => {
-      let name = icon.dataset.name
-      // console.log(name)
-      fetching(name)
-   })
-})
+icons.forEach((icon) => {
+	icon.addEventListener('click', (e) => {
+		let nameIcon = icon.dataset.name;
+		fetching(nameIcon);
+	});
+});
 
-function appendToBody (data) {
-   container.innerHTML = data;
+function getKategoriElements() {
+	const kategoriCardElements = document.querySelectorAll('.card a');
+	kategoriCardElements.forEach((cardEl) => {
+		cardEl.addEventListener('click', (e) => {
+			let nameCard = cardEl.dataset.kategori;
+         // console.log(dataset);
+         e.preventDefault();
+         fetching(nameCard)
+		});
+	});
 }
