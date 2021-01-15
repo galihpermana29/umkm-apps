@@ -92,7 +92,7 @@ function insertCardItems() {
 	imageName.forEach((image) => {
 		cardItemsContainer.innerHTML += `
       <div class="cardItems">
-         <img src="/img/${image.imageName}.png" alt="${image.itemName}">
+         <img src="img/${image.imageName}.png" alt="${image.itemName}">
          <div class="names">
             <h4 class="itemName">${image.itemName}</h4>
             <h4 class="itemPrice">${image.priceItem}k</h4>
