@@ -7,8 +7,6 @@ function fetching(name) {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
-				// console.log(this.response);
-				// appendToBody(this.response);
 				container.innerHTML = this.response;
 				getKategoriElements();
 			} else if (xhr.status !== 4) {
@@ -20,7 +18,7 @@ function fetching(name) {
 	// console.log(name)
 	if (window.location.hash == '' && name === undefined) {
 		name = 'home';
-		console.log('t')
+		console.log('t');
 	}
 
 	icons.forEach((icon) => {
@@ -28,7 +26,7 @@ function fetching(name) {
 		if (icon.dataset.name === name) {
 			i.style.color = 'white';
 		} else {
-         i.style.color = '#9394d6'
+			i.style.color = '#9394d6';
 		}
 	});
 	xhr.open('GET', `./pages/${name}.html`);
@@ -50,9 +48,34 @@ function getKategoriElements() {
 	kategoriCardElements.forEach((cardEl) => {
 		cardEl.addEventListener('click', (e) => {
 			let nameCard = cardEl.dataset.kategori;
-			// console.log(dataset);
 			e.preventDefault();
 			fetching(nameCard);
+
+			setTimeout(() => {
+				const cardItemsCont = document.querySelector('.cardItemsContainer');
+				cardItemsCont.innerHTML = `
+            <div class="cardItems">
+      <img src="../img/kursi_estetik.png" alt="kursi minimalis">
+      <h4 class="itemName">Kursi Minimalis</h4>
+      <h4 class="itemPrice">500k</h4>
+   </div>
+   <div class="cardItems">
+      <img src="../img/lampu-belajar.png" alt="kursi minimalis">
+      <h4 class="itemName">Lampu Belajar</h4>
+      <h4 class="itemPrice">100k</h4>
+   </div>
+   <div class="cardItems">
+      <img src="../img/lampu-belajar.png" alt="kursi minimalis">
+      <h4 class="itemName">Lampu Belajar</h4>
+      <h4 class="itemPrice">100k</h4>
+   </div>
+   <div class="cardItems">
+      <img src="../img/kursi_estetik.png" alt="kursi minimalis">
+      <h4 class="itemName">Kursi Minimalis</h4>
+      <h4 class="itemPrice">500k</h4>
+   </div>
+            `;
+			}, 1000);
 		});
 	});
 }
