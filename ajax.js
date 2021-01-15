@@ -9,6 +9,9 @@ function fetching(name) {
 			if (xhr.status === 200) {
 				container.innerHTML = this.response;
 				getKategoriElements();
+				if (name === 'kerajinan') {
+					insertCardItems();
+				}
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
 			}
@@ -50,32 +53,32 @@ function getKategoriElements() {
 			let nameCard = cardEl.dataset.kategori;
 			e.preventDefault();
 			fetching(nameCard);
-
-			setTimeout(() => {
-				const cardItemsCont = document.querySelector('.cardItemsContainer');
-				cardItemsCont.innerHTML = `
-            <div class="cardItems">
-      <img src="../img/kursi_estetik.png" alt="kursi minimalis">
-      <h4 class="itemName">Kursi Minimalis</h4>
-      <h4 class="itemPrice">500k</h4>
-   </div>
-   <div class="cardItems">
-      <img src="../img/lampu-belajar.png" alt="kursi minimalis">
-      <h4 class="itemName">Lampu Belajar</h4>
-      <h4 class="itemPrice">100k</h4>
-   </div>
-   <div class="cardItems">
-      <img src="../img/lampu-belajar.png" alt="kursi minimalis">
-      <h4 class="itemName">Lampu Belajar</h4>
-      <h4 class="itemPrice">100k</h4>
-   </div>
-   <div class="cardItems">
-      <img src="../img/kursi_estetik.png" alt="kursi minimalis">
-      <h4 class="itemName">Kursi Minimalis</h4>
-      <h4 class="itemPrice">500k</h4>
-   </div>
-            `;
-			}, 1000);
 		});
 	});
+}
+
+function insertCardItems() {
+	const cardItemsContainer = document.querySelector('.cardItemsContainer');
+	cardItemsContainer.innerHTML = `
+   
+   <div class="cardItems">
+      <img src="../img/kursi_estetik.png" alt="kursi minimalis">
+      <h4 class="itemName">Kursi Minimalis</h4>
+      <h4 class="itemPrice">500k</h4>
+   </div>
+   <div class="cardItems">
+      <img src="../img/lampu-belajar.png" alt="kursi minimalis">
+      <h4 class="itemName">Lampu Belajar</h4>
+      <h4 class="itemPrice">100k</h4>
+   </div>
+   <div class="cardItems">
+      <img src="../img/lampu-belajar.png" alt="kursi minimalis">
+      <h4 class="itemName">Lampu Belajar</h4>
+      <h4 class="itemPrice">100k</h4>
+   </div>
+   <div class="cardItems">
+      <img src="../img/kursi_estetik.png" alt="kursi minimalis">
+      <h4 class="itemName">Kursi Minimalis</h4>
+      <h4 class="itemPrice">500k</h4>
+   </div>`;
 }
