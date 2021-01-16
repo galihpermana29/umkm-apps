@@ -4,38 +4,44 @@ const imageName = [
 	{
 		imageName: 'kursi_estetik',
 		itemName: 'Kursi Minimalis',
-      priceItem: 200,
-      descItem : "Merupakan kursi minimalis yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Kursi ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang simple tetapi elegan"
+		priceItem: 200,
+		descItem:
+			'Merupakan kursi minimalis yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Kursi ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang simple tetapi elegan',
 	},
 	{
 		imageName: 'lampu-belajar',
 		itemName: 'Lampu Belajar',
-      priceItem: 180,
-      descItem : "Lampu belajar ini mempunyai pencahayaan yang pas untuk belajar di malam hari, bobotnya yang ringan juga membuat lampu belajar ini bisa di bawa kemana saja dan di pindahkan dimana saja."
+		priceItem: 180,
+		descItem:
+			'Lampu belajar ini mempunyai pencahayaan yang pas untuk belajar di malam hari, bobotnya yang ringan juga membuat lampu belajar ini bisa di bawa kemana saja dan di pindahkan dimana saja.',
 	},
 	{
 		imageName: 'jam',
 		itemName: 'Jam Dinding',
-      priceItem: 70,
-      descItem : "Jam dinding kayu yang dibuat dengan kayu mahoni dengan konsep simple. Cocok untuk rumah yang ingin memliki nuansa kayu dan elegan."
+		priceItem: 70,
+		descItem:
+			'Jam dinding kayu yang dibuat dengan kayu mahoni dengan konsep simple. Cocok untuk rumah yang ingin memliki nuansa kayu dan elegan.',
 	},
 	{
 		imageName: 'meja_cafe',
 		itemName: 'Meja Kafe',
-      priceItem: 100,
-      descItem : "Merupakan meja yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Meja ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang bebas dan santai"
+		priceItem: 100,
+		descItem:
+			'Merupakan meja yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Meja ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang bebas dan santai',
 	},
 	{
 		imageName: 'phone_holder',
 		itemName: 'Penyanggah Hp',
-      priceItem: 50,
-      descItem : "Penyanggah hp yang bisa digunakan sebagai sandaran hp kamu ketika ingin menonton film, konferensi zoom, atau mengecas. Dibuat menggunakan kayu bakau, sehingga sangat kuat dan pas untuk tipe hp apapun"
+		priceItem: 50,
+		descItem:
+			'Penyanggah hp yang bisa digunakan sebagai sandaran hp kamu ketika ingin menonton film, konferensi zoom, atau mengecas. Dibuat menggunakan kayu bakau, sehingga sangat kuat dan pas untuk tipe hp apapun',
 	},
 	{
 		imageName: 'tempat_pisau',
 		itemName: 'Tempat Pisau',
-      priceItem: 40,
-      descItem : "Letakkan pisau dapurmu pada tempat yang sesuai, ini memudahkan kamu dalam mengambil dan mencari nya. Tempat pisau ini di desain agar pengguna tidak bingung menyimpan pisaunya."
+		priceItem: 40,
+		descItem:
+			'Letakkan pisau dapurmu pada tempat yang sesuai, ini memudahkan kamu dalam mengambil dan mencari nya. Tempat pisau ini di desain agar pengguna tidak bingung menyimpan pisaunya.',
 	},
 ];
 
@@ -78,7 +84,10 @@ fetching();
 icons.forEach((icon) => {
 	icon.addEventListener('click', (e) => {
 		let nameIcon = icon.dataset.name;
-		fetching(nameIcon);
+      fetching(nameIcon);
+      setTimeout(() => {
+         
+      }, 1000);
 	});
 });
 
@@ -124,7 +133,6 @@ function insertCardItems() {
 	favoriteIcons.forEach(function (icon) {
 		icon.addEventListener('click', function (e) {
 			icon.classList.toggle('fav');
-			// console.dir(this);
 		});
 	});
 
@@ -132,12 +140,10 @@ function insertCardItems() {
 	cardItems.forEach(function (item) {
 		item.addEventListener('click', function (e) {
 			if (this.className === 'cardItems') {
-				// console.dir(this.nextElementSibling);
 				const imgClickName = this.children[0].attributes[0].value;
 				const itemClickName = this.children[1].children[0].textContent;
 				const priceClickName = this.children[1].children[1].textContent;
 				let favStatus = false;
-				// console.dir(this.nextElementSibling.classList);
 				if (this.nextElementSibling.classList[0] === 'fav') {
 					favStatus = true;
 				}
@@ -159,19 +165,50 @@ function detailsProperties(imgName, itemName, itemPrice, favStatus) {
 		const name = document.querySelector('.detailNamePrice h2');
 		const price = document.querySelector('.detailNamePrice h3');
 		const desc = document.querySelector('.detailDesc p');
-      img.setAttribute('src', `${imgName}`)
-      name.innerHTML = `${itemName}`
-      price.innerHTML = `${itemPrice}`
+		img.setAttribute('src', `${imgName}`);
+		name.innerHTML = `${itemName}`;
+		price.innerHTML = `${itemPrice}`;
 
-      for(let i = 0; i < imageName.length; i++){
-         if(name.textContent === imageName[i].itemName) {
-            desc.innerHTML = `${imageName[i].descItem}`
-         }
-      }
+		for (let i = 0; i < imageName.length; i++) {
+			if (name.textContent === imageName[i].itemName) {
+				desc.innerHTML = `${imageName[i].descItem}`;
+			}
+		}
 
-      const backButton = document.querySelector('.pageId svg')
-      backButton.addEventListener('click', function() {
-         fetching('kerajinan')
-      })
+		const backButton = document.querySelector('.pageId svg');
+		backButton.addEventListener('click', function () {
+			fetching('kerajinan');
+		});
+
+		const minButton = document.querySelector('.kurang');
+		const addButton = document.querySelector('.tambah');
+      const qInput = document.querySelector('.quantity input');
+      const addToCartButton = document.querySelector('.addToCartButton')
+		// console.dir(qValue)
+      addMinButtonEl(minButton, addButton, qInput);
+      getAddToCartButtonEl(addToCartButton)
 	}, 1000);
+}
+
+function addMinButtonEl(minButton, addButton, qInput) {
+	let val = parseInt(qInput.value);
+	addButton.addEventListener('click', (e) => {
+      val += 1;
+		qInput.value = `${val}`
+   });
+   
+   minButton.addEventListener('click', (e) => {
+      if(val === 1) return;
+      val -= 1;
+      qInput.value = `${val}`
+   })
+}
+
+function getAddToCartButtonEl(buttonEl) { 
+   buttonEl.addEventListener('click', function(e){
+      const imgCart = this.parentElement.parentElement.children[0].children[0].getAttribute('src')
+      const nameCart = this.parentElement.parentElement.children[1].children[0].textContent
+      const priceCart = this.parentElement.parentElement.children[1].children[1].textContent
+      // console.log(imgCart, nameCart, priceCart )
+   })
 }

@@ -1,0 +1,105 @@
+.cartContainer {
+   display: grid;
+   /* justify-content: center; */
+   /* align-content: center; */
+   justify-items: center;
+}
+
+.cartItem {
+   display: grid;
+   /* grid-template-columns: 20% 60% 20%; */
+   grid-template-columns: 70px auto 80px;
+   grid-template-rows: 70px;
+   /* border: 1px solid red; */
+   margin: 20px 0;
+   padding: 10px;
+   background-color: #E3E4F7;
+   border-radius: 10px;
+   justify-items: center;
+   align-items: center;
+   max-width: 320px;
+   width: 100%;
+   align-content: center;
+   /* justify-content: center; */
+   gap: 5px;
+   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.05);
+}
+
+.cartItemImg img {
+   width: 80%;
+   /* background-color: red; */
+}
+
+.cartItemImg {
+   display: grid;
+   justify-items: center;
+   align-items: center;
+   /* width: 100%; */
+   /* height: 100%; */
+   background-color: white;
+   border-radius: 10px;
+   box-sizing: border-box;
+   padding: 5px;
+   width: 66px;
+   height: 66px;
+}
+
+.cartItemNamePrice h2{
+   /* width: 100%; */
+   /* border: 1px solid red; */
+   font-size: 1.1em;
+   margin-bottom: 5px;
+}
+.cartItemNamePrice h4{
+   font-weight: 400;
+}
+
+.cartCheck {
+   /* border: 1px solid red; */
+   width: 100%;
+   /* width: 66px; */
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: flex-end;
+   height: 66px;
+   padding: 5px;
+}
+
+.cartCheck .quantity {
+	display: flex;
+	/* border: 1px solid red; */
+	/* width: 100%; */
+	justify-content: center;
+	align-items: center;
+}
+
+input[type=checkbox] {
+   transform: scale(1.3);
+}
+
+.cartCheck .quantity input {
+	width: 20px;
+	/* padding: 5px; */
+   margin: 0 10px;
+   text-align: center;
+}
+
+.cartCheck .quantity .qButton {
+	color: white;
+	background-color: #4649a0;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.1); */
+	transition: 0.3s ease-in-out all;
+	cursor: pointer;
+}
+
+.cartCheck .quantity .qButton h2 {
+	font-weight: 400;
+}
