@@ -1,6 +1,6 @@
 const container = document.querySelector('.container');
 const icons = document.querySelectorAll('.icon');
-const imageName = [
+const items = [
 	{
 		imageName: 'kursi_estetik',
 		itemName: 'Kursi Minimalis',
@@ -45,17 +45,15 @@ const imageName = [
 	},
 ];
 
-function fetching(name) {
+function fetching(name, options) {
 	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
-				// console.log(this.response)
 				container.innerHTML = this.response;
-				getKategoriElements();
-				if (name == 'kerajinan') {
-					insertCardItems();
-				}
+				if (name === 'home') getAllHomeElements(name);
+				if (name === 'kerajinan') getAllKerajinanElements(name);
+				if (name === 'detail') getAllDetailElements(options);
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
 			}
@@ -81,134 +79,158 @@ function fetching(name) {
 
 fetching();
 
-icons.forEach((icon) => {
-	icon.addEventListener('click', (e) => {
-		let nameIcon = icon.dataset.name;
-      fetching(nameIcon);
-      setTimeout(() => {
-         
-      }, 1000);
-	});
-});
+function getAllHomeElements(name) {
+	const categoriCardElements = document.querySelectorAll('.card a');
 
-function getKategoriElements() {
-	const kategoriCardElements = document.querySelectorAll('.card a');
-	kategoriCardElements.forEach((cardEl) => {
-		cardEl.addEventListener('click', (e) => {
-			let nameCard = cardEl.dataset.kategori;
-			e.preventDefault();
-			fetching(nameCard);
+	function fetchCategoryShopPage() {
+		categoriCardElements.forEach((cardEl) => {
+			cardEl.addEventListener('click', (e) => {
+				let nameCard = cardEl.dataset.kategori;
+				e.preventDefault();
+				fetching(nameCard);
+			});
+		});
+	}
+
+	fetchCategoryShopPage();
+}
+
+function iconsOnClickAction() {
+	const icons = document.querySelectorAll('.icon');
+	icons.forEach((icon) => {
+		icon.addEventListener('click', (e) => {
+			let nameIcon = icon.dataset.name;
+			fetching(nameIcon);
 		});
 	});
 }
 
-function insertCardItems() {
+iconsOnClickAction();
+
+function getAllKerajinanElements(name) {
 	const cardItemsContainer = document.querySelector('.cardItemsContainer');
-	imageName.forEach((image) => {
-		cardItemsContainer.innerHTML += `
-      <div class="cards">
-         <div class="cardItems">
-            <img src="img/${image.imageName}.png" alt="${image.itemName}">
-            <div class="names">
-               <h4 class="itemName">${image.itemName}</h4>
-               <h4 class="itemPrice">${image.priceItem}k</h4>
+
+	const renderCardItems = () => {
+		items.forEach((item) => {
+			cardItemsContainer.innerHTML += `
+         <div class="cards">
+            <div class="cardItems">
+               <img src="img/${item.imageName}.png" alt="${item.itemName}">
+               <div class="names">
+                  <h4 class="itemName">${item.itemName}</h4>
+                  <h4 class="itemPrice">${item.priceItem}k</h4>
+               </div>
             </div>
-         </div>
-         <svg
-            class=""
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            fill="currentColor"
-            class="bi bi-heart-fill"
-            viewBox="0 0 16 16">
-            <path
-            fill-rule="evenodd"
-            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-         </svg>
-      </div>`;
-	});
-
-	const favoriteIcons = document.querySelectorAll('.cards svg');
-	favoriteIcons.forEach(function (icon) {
-		icon.addEventListener('click', function (e) {
-			icon.classList.toggle('fav');
+            <svg
+               class=""
+               xmlns="http://www.w3.org/2000/svg"
+               width="22"
+               height="22"
+               fill="currentColor"
+               class="bi bi-heart-fill"
+               viewBox="0 0 16 16">
+               <path
+               fill-rule="evenodd"
+               d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+         </div>`;
+      });
+      
+      const favoriteButton = document.querySelectorAll('.cards svg');
+		favoriteButton.forEach((icon) => {
+			icon.addEventListener('click', (e) => {
+            icon.classList.toggle('fav');
+			});
 		});
-	});
+	};
 
-	const cardItems = document.querySelectorAll('.cardItems');
-	cardItems.forEach(function (item) {
-		item.addEventListener('click', function (e) {
-			if (this.className === 'cardItems') {
-				const imgClickName = this.children[0].attributes[0].value;
-				const itemClickName = this.children[1].children[0].textContent;
-				const priceClickName = this.children[1].children[1].textContent;
-				let favStatus = false;
-				if (this.nextElementSibling.classList[0] === 'fav') {
-					favStatus = true;
+	const getAllItemsPropertiesForDetailsPage = () => {
+		const cardItems = document.querySelectorAll('.cardItems');
+		cardItems.forEach(function (item) {
+			item.addEventListener('click', function (e) {
+				if (this.className === 'cardItems') {
+					const imgClickName = this.children[0].attributes[0].value;
+					const itemClickName = this.children[1].children[0].textContent;
+					const priceClickName = this.children[1].children[1].textContent;
+               let favStatus = false;
+               
+					if (this.nextElementSibling.classList[0] === 'fav') {
+						favStatus = true;
+					}
+
+					let itemProperties = {
+						imageClickedName: imgClickName,
+						itemClickedName: itemClickName,
+						priceClickedName: priceClickName,
+						favClickedStatus: favStatus,
+					};
+
+					fetching('detail', itemProperties);
 				}
-				fetching('detail');
-				detailsProperties(
-					imgClickName,
-					itemClickName,
-					priceClickName,
-					favStatus
-				);
-			}
+			});
 		});
-	});
+	};
+
+	renderCardItems();
+	getAllItemsPropertiesForDetailsPage();
 }
 
-function detailsProperties(imgName, itemName, itemPrice, favStatus) {
-	setTimeout(() => {
-		const img = document.querySelector('.detailImg img');
-		const name = document.querySelector('.detailNamePrice h2');
-		const price = document.querySelector('.detailNamePrice h3');
-		const desc = document.querySelector('.detailDesc p');
-		img.setAttribute('src', `${imgName}`);
-		name.innerHTML = `${itemName}`;
-		price.innerHTML = `${itemPrice}`;
+function getAllDetailElements({
+	imageClickedName,
+	itemClickedName,
+	priceClickedName,
+	favClickedStatus,
+}) {
+	const img = document.querySelector('.detailImg img');
+	const name = document.querySelector('.detailNamePrice h2');
+	const price = document.querySelector('.detailNamePrice h3');
+	const desc = document.querySelector('.detailDesc p');
 
-		for (let i = 0; i < imageName.length; i++) {
-			if (name.textContent === imageName[i].itemName) {
-				desc.innerHTML = `${imageName[i].descItem}`;
+	const renderDetailItem = () => {
+		img.setAttribute('src', `${imageClickedName}`);
+		name.innerHTML = `${itemClickedName}`;
+		price.innerHTML = `${priceClickedName}`;
+
+		for (let i = 0; i < items.length; i++) {
+			if (name.textContent === items[i].itemName) {
+				desc.innerHTML = `${items[i].descItem}`;
 			}
 		}
+	};
 
-		const backButton = document.querySelector('.pageId svg');
-		backButton.addEventListener('click', function () {
-			fetching('kerajinan');
-		});
+	const backButton = document.querySelector('.pageId svg');
+	backButton.addEventListener('click', function () {
+		fetching('kerajinan');
+	});
 
-		const minButton = document.querySelector('.kurang');
-		const addButton = document.querySelector('.tambah');
-      const qInput = document.querySelector('.quantity input');
-      const addToCartButton = document.querySelector('.addToCartButton')
-		// console.dir(qValue)
-      addMinButtonEl(minButton, addButton, qInput);
-      getAddToCartButtonEl(addToCartButton)
-	}, 1000);
-}
+	const minButton = document.querySelector('.kurang');
+	const addButton = document.querySelector('.tambah');
+	const qInput = document.querySelector('.quantity input');
+	const addToCartButton = document.querySelector('.addToCartButton');
 
-function addMinButtonEl(minButton, addButton, qInput) {
 	let val = parseInt(qInput.value);
 	addButton.addEventListener('click', (e) => {
-      val += 1;
-		qInput.value = `${val}`
-   });
-   
-   minButton.addEventListener('click', (e) => {
-      if(val === 1) return;
-      val -= 1;
-      qInput.value = `${val}`
-   })
+		val += 1;
+		qInput.value = `${val}`;
+	});
+
+	minButton.addEventListener('click', (e) => {
+		if (val === 1) return;
+		val -= 1;
+		qInput.value = `${val}`;
+	});
+
+	renderDetailItem();
 }
 
-function getAddToCartButtonEl(buttonEl) { 
-   buttonEl.addEventListener('click', function(e){
-      const imgCart = this.parentElement.parentElement.children[0].children[0].getAttribute('src')
-      const nameCart = this.parentElement.parentElement.children[1].children[0].textContent
-      const priceCart = this.parentElement.parentElement.children[1].children[1].textContent
-      // console.log(imgCart, nameCart, priceCart )
-   })
+function getAddToCartButtonEl(buttonEl) {
+	buttonEl.addEventListener('click', function (e) {
+		const imgCart = this.parentElement.parentElement.children[0].children[0].getAttribute(
+			'src'
+		);
+		const nameCart = this.parentElement.parentElement.children[1].children[0]
+			.textContent;
+		const priceCart = this.parentElement.parentElement.children[1].children[1]
+			.textContent;
+	});
 }
