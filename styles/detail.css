@@ -52,6 +52,7 @@
 
 .itemDetailEl .detailDesc p {
    font-weight: 300;
+   text-align: justify;
 }
 
 .itemDetailEl .detailRating {
@@ -63,15 +64,16 @@
 
 .itemDetailEl .detailRating img {
    width: 20px;
+   color: blue;
+   fill: blue;
 }
 
 .itemDetailEl .detailAddToCart {
    display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
    /* border: 1px solid red; */
    align-items: center;
    justify-items: center;
-   /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.05); */
    border-radius: 5px;
    margin: 10px 0;
    gap: 5px;
@@ -80,6 +82,34 @@
 .detailAddToCart .quantity input {
    width: 20px;
    padding: 5px;
+   margin: 0 10px;
+}
+
+.detailAddToCart .quantity {
+   display: flex;
+   /* border: 1px solid red; */
+   /* width: 100%; */
+   justify-content: center;
+   align-items: center;
+}
+
+.detailAddToCart .quantity .qButton {
+   color: white;
+   background-color: #4649a0;
+   text-align: center;
+   width: 30px;
+   height: 30px;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.1);
+   transition: .3s ease-in-out all;
+   cursor: pointer;
+}
+
+.detailAddToCart .quantity .qButton h2{
+   font-weight: 400;
 }
 
 .detailAddToCart .addToCartButton {
@@ -90,4 +120,17 @@
    cursor: pointer;
    text-transform: uppercase;
    font-size: 12px;
+   display: flex;
+   align-items: center;
+   width: 80%;
+   justify-content: center;
+   transition: .3s ease-in-out all;
+}
+
+.detailAddToCart .addToCartButton:hover, .detailAddToCart .quantity .qButton:hover  {
+   background-color: #383a80;
+}
+
+.addToCartButton p {
+   margin-right: 5px;
 }

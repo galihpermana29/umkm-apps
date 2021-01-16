@@ -4,32 +4,38 @@ const imageName = [
 	{
 		imageName: 'kursi_estetik',
 		itemName: 'Kursi Minimalis',
-		priceItem: 200,
+      priceItem: 200,
+      descItem : "Merupakan kursi minimalis yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Kursi ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang simple tetapi elegan"
 	},
 	{
 		imageName: 'lampu-belajar',
 		itemName: 'Lampu Belajar',
-		priceItem: 180,
+      priceItem: 180,
+      descItem : "Lampu belajar ini mempunyai pencahayaan yang pas untuk belajar di malam hari, bobotnya yang ringan juga membuat lampu belajar ini bisa di bawa kemana saja dan di pindahkan dimana saja."
 	},
 	{
 		imageName: 'jam',
 		itemName: 'Jam Dinding',
-		priceItem: 70,
+      priceItem: 70,
+      descItem : "Jam dinding kayu yang dibuat dengan kayu mahoni dengan konsep simple. Cocok untuk rumah yang ingin memliki nuansa kayu dan elegan."
 	},
 	{
 		imageName: 'meja_cafe',
-		itemName: 'Meja Cafe',
-		priceItem: 100,
+		itemName: 'Meja Kafe',
+      priceItem: 100,
+      descItem : "Merupakan meja yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Meja ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang bebas dan santai"
 	},
 	{
 		imageName: 'phone_holder',
 		itemName: 'Penyanggah Hp',
-		priceItem: 50,
+      priceItem: 50,
+      descItem : "Penyanggah hp yang bisa digunakan sebagai sandaran hp kamu ketika ingin menonton film, konferensi zoom, atau mengecas. Dibuat menggunakan kayu bakau, sehingga sangat kuat dan pas untuk tipe hp apapun"
 	},
 	{
 		imageName: 'tempat_pisau',
 		itemName: 'Tempat Pisau',
-		priceItem: 40,
+      priceItem: 40,
+      descItem : "Letakkan pisau dapurmu pada tempat yang sesuai, ini memudahkan kamu dalam mengambil dan mencari nya. Tempat pisau ini di desain agar pengguna tidak bingung menyimpan pisaunya."
 	},
 ];
 
@@ -52,7 +58,6 @@ function fetching(name) {
 
 	if (window.location.hash == '' && name === undefined) {
 		name = 'home';
-		console.log('t');
 	}
 
 	icons.forEach((icon) => {
@@ -148,15 +153,21 @@ function insertCardItems() {
 	});
 }
 
-function detailsProperties(imageName, itemName, itemPrice, favStatus) {
-	console.log(imageName, itemName, itemPrice, favStatus);
+function detailsProperties(imgName, itemName, itemPrice, favStatus) {
 	setTimeout(() => {
 		const img = document.querySelector('.detailImg img');
 		const name = document.querySelector('.detailNamePrice h2');
 		const price = document.querySelector('.detailNamePrice h3');
-      img.setAttribute('src', `${imageName}`)
+		const desc = document.querySelector('.detailDesc p');
+      img.setAttribute('src', `${imgName}`)
       name.innerHTML = `${itemName}`
       price.innerHTML = `${itemPrice}`
+
+      for(let i = 0; i < imageName.length; i++){
+         if(name.textContent === imageName[i].itemName) {
+            desc.innerHTML = `${imageName[i].descItem}`
+         }
+      }
 
       const backButton = document.querySelector('.pageId svg')
       backButton.addEventListener('click', function() {
