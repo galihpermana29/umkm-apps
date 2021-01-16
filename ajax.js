@@ -38,6 +38,7 @@ function fetching(name) {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
+				// console.log(this.response)
 				container.innerHTML = this.response;
 				getKategoriElements();
 				if (name == 'kerajinan') {
@@ -91,14 +92,16 @@ function insertCardItems() {
 	const cardItemsContainer = document.querySelector('.cardItemsContainer');
 	imageName.forEach((image) => {
 		cardItemsContainer.innerHTML += `
-      <div class="cardItems">
-         <img src="img/${image.imageName}.png" alt="${image.itemName}">
-         <div class="names">
-            <h4 class="itemName">${image.itemName}</h4>
-            <h4 class="itemPrice">${image.priceItem}k</h4>
+      <div class="cards">
+         <div class="cardItems">
+            <img src="img/${image.imageName}.png" alt="${image.itemName}">
+            <div class="names">
+               <h4 class="itemName">${image.itemName}</h4>
+               <h4 class="itemPrice">${image.priceItem}k</h4>
+            </div>
          </div>
          <svg
-            class="t"
+            class=""
             xmlns="http://www.w3.org/2000/svg"
             width="22"
             height="22"
@@ -112,10 +115,52 @@ function insertCardItems() {
       </div>`;
 	});
 
-	const favoriteIcons = document.querySelectorAll('.cardItems svg');
-	favoriteIcons.forEach(icon => {
-      icon.addEventListener('click', (e) => {
-         icon.classList.toggle('fav')
+	const favoriteIcons = document.querySelectorAll('.cards svg');
+	favoriteIcons.forEach(function (icon) {
+		icon.addEventListener('click', function (e) {
+			icon.classList.toggle('fav');
+			// console.dir(this);
+		});
+	});
+
+	const cardItems = document.querySelectorAll('.cardItems');
+	cardItems.forEach(function (item) {
+		item.addEventListener('click', function (e) {
+			if (this.className === 'cardItems') {
+				// console.dir(this.nextElementSibling);
+				const imgClickName = this.children[0].attributes[0].value;
+				const itemClickName = this.children[1].children[0].textContent;
+				const priceClickName = this.children[1].children[1].textContent;
+				let favStatus = false;
+				// console.dir(this.nextElementSibling.classList);
+				if (this.nextElementSibling.classList[0] === 'fav') {
+					favStatus = true;
+				}
+				fetching('detail');
+				detailsProperties(
+					imgClickName,
+					itemClickName,
+					priceClickName,
+					favStatus
+				);
+			}
+		});
+	});
+}
+
+function detailsProperties(imageName, itemName, itemPrice, favStatus) {
+	console.log(imageName, itemName, itemPrice, favStatus);
+	setTimeout(() => {
+		const img = document.querySelector('.detailImg img');
+		const name = document.querySelector('.detailNamePrice h2');
+		const price = document.querySelector('.detailNamePrice h3');
+      img.setAttribute('src', `${imageName}`)
+      name.innerHTML = `${itemName}`
+      price.innerHTML = `${itemPrice}`
+
+      const backButton = document.querySelector('.pageId svg')
+      backButton.addEventListener('click', function() {
+         fetching('kerajinan')
       })
-   })
+	}, 1000);
 }

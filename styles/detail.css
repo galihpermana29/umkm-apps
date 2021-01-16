@@ -1,0 +1,93 @@
+.detail {
+   color: #4649a0;
+}
+
+.pageId {
+	display: grid;
+	grid-template-columns: repeat(3, max-content);
+	/* border: 1px solid red; */
+	
+	justify-content: space-between;
+}
+
+.pageId svg {
+   cursor: pointer;
+}
+
+.itemDetailEl {
+	display: grid;
+	margin: 20px 0 80px 0;
+	grid-template-areas:
+		'detailImg'
+		'detailNamePrice'
+		'detailDesc'
+		'detailRating'
+      'detailAddToCart';
+   gap: 15px;
+}
+
+.itemDetailEl img {
+	width: 100%;
+	max-width: 200px;
+}
+
+.itemDetailEl .detailImg {
+	grid-area: detailImg;
+	background-color: #f8f8f8;
+	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.itemDetailEl .detailNamePrice {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.itemDetailEl .detailNamePrice h2 {
+   font-weight: 600;
+}
+
+.itemDetailEl .detailDesc p {
+   font-weight: 300;
+}
+
+.itemDetailEl .detailRating {
+   display: grid;
+   grid-template-columns: repeat(6, max-content);
+   /* border: 1px solid red; */
+   gap: 5px;
+}
+
+.itemDetailEl .detailRating img {
+   width: 20px;
+}
+
+.itemDetailEl .detailAddToCart {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+   /* border: 1px solid red; */
+   align-items: center;
+   justify-items: center;
+   /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.05); */
+   border-radius: 5px;
+   margin: 10px 0;
+   gap: 5px;
+}
+
+.detailAddToCart .quantity input {
+   width: 20px;
+   padding: 5px;
+}
+
+.detailAddToCart .addToCartButton {
+   background-color: #4649a0;
+   color: white;
+   padding: 10px;
+   border-radius: 5px;
+   cursor: pointer;
+   text-transform: uppercase;
+   font-size: 12px;
+}
