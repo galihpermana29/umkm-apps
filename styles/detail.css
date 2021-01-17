@@ -160,8 +160,8 @@ input[type='number'] {
 	/* width: 300px; */
 	position: fixed;
 	top: -130px;
-	left: 100px;
-	right: 100px;
+	left: 50px;
+	right: 50px;
 	display: grid;
 	grid-template-columns: 60px 200px;
 	padding: 10px;
@@ -177,8 +177,8 @@ input[type='number'] {
 
 .addToNotifContainer.active {
    top: 30px;
-	left: 100px;
-	right: 100px;
+	left: 50px;
+	right: 50px;
 }
 
 .addToNotifContainer img {
