@@ -54,6 +54,7 @@ function fetching(name, options) {
 				if (name === 'home') getAllHomeElements(name);
 				if (name === 'kerajinan') getAllKerajinanElements(name);
 				if (name === 'detail') getAllDetailElements(options);
+				if (name === 'cart') getAllCartElements(options);
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
 			}
@@ -134,12 +135,12 @@ function getAllKerajinanElements(name) {
                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
             </svg>
          </div>`;
-      });
-      
-      const favoriteButton = document.querySelectorAll('.cards svg');
+		});
+
+		const favoriteButton = document.querySelectorAll('.cards svg');
 		favoriteButton.forEach((icon) => {
 			icon.addEventListener('click', (e) => {
-            icon.classList.toggle('fav');
+				icon.classList.toggle('fav');
 			});
 		});
 	};
@@ -152,8 +153,8 @@ function getAllKerajinanElements(name) {
 					const imgClickName = this.children[0].attributes[0].value;
 					const itemClickName = this.children[1].children[0].textContent;
 					const priceClickName = this.children[1].children[1].textContent;
-               let favStatus = false;
-               
+					let favStatus = false;
+
 					if (this.nextElementSibling.classList[0] === 'fav') {
 						favStatus = true;
 					}
@@ -175,7 +176,7 @@ function getAllKerajinanElements(name) {
 	getAllItemsPropertiesForDetailsPage();
 }
 
-function getAllDetailElements({
+async function getAllDetailElements({
 	imageClickedName,
 	itemClickedName,
 	priceClickedName,
@@ -186,7 +187,7 @@ function getAllDetailElements({
 	const price = document.querySelector('.detailNamePrice h3');
 	const desc = document.querySelector('.detailDesc p');
 
-	const renderDetailItem = () => {
+	const renderDetailItem = async () => {
 		img.setAttribute('src', `${imageClickedName}`);
 		name.innerHTML = `${itemClickedName}`;
 		price.innerHTML = `${priceClickedName}`;
@@ -219,12 +220,7 @@ function getAllDetailElements({
 		val -= 1;
 		qInput.value = `${val}`;
 	});
-
-	renderDetailItem();
-}
-
-function getAddToCartButtonEl(buttonEl) {
-	buttonEl.addEventListener('click', function (e) {
+	addToCartButton.addEventListener('click', function (e) {
 		const imgCart = this.parentElement.parentElement.children[0].children[0].getAttribute(
 			'src'
 		);
@@ -232,5 +228,71 @@ function getAddToCartButtonEl(buttonEl) {
 			.textContent;
 		const priceCart = this.parentElement.parentElement.children[1].children[1]
 			.textContent;
+      const quantityCart = this.parentElement.children[0].children[1].value;
+      const imgNotif = document.querySelector('.imgNotif img')
+      const textNotif = document.querySelector('.textNotif h3')
+      const addToNotifContainer = document.querySelector('.addToNotifContainer')
+      imgNotif.setAttribute('src', `${imgCart}`)
+      textNotif.innerHTML = `${nameCart}`
+      addToNotifContainer.classList.add('active')
+      setTimeout(() => {
+         addToNotifContainer.classList.remove('active')
+      }, 2000);
+		let item = {
+			itemName: nameCart,
+			itemPrice: priceCart,
+			itemImg: imgCart,
+			itemQuantity: quantityCart,
+		};
+		storeData(item);
 	});
+
+	renderDetailItem();
+}
+
+async function getAllCartElements(buttonEl) {
+	let data = await readAllData();
+	console.log(data[0]);
+   const cartContainer = document.querySelector('.cartContainer');
+   if(data[0] === undefined) {
+      cartContainer.innerHTML = `
+         <p class="ifCartKosong">Keranjang kamu kosong...</p>
+      
+      `
+   }
+	data.forEach((data) => {
+		cartContainer.innerHTML += `
+         <div class="cartItem">
+            <div class="cartItemImg">
+               <img src="${data.itemImg}" alt="${data.itemName}" />
+            </div>
+            <div class="cartItemNamePrice">
+               <h2>${data.itemName}</h2>
+               <h4>${data.itemPrice}</h4>
+            </div>
+            <div class="cartCheck">
+               <input type="checkbox" name="checkbox" id="checkbox" />
+               <div class="quantity">
+                  <div class="qButton kurang">
+                     <h2>-</h2>
+                  </div>
+                  <input
+                     type="number"
+                     name="quantity"
+                     min="1"
+                     max="10"
+                     value="${data.itemQuantity}"
+                  />
+                  <div class="qButton tambah">
+                     <h2>+</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+   `;
+	});
+
+	const cartItemImg = document.querySelector('.cartItemImg img');
+	const cartItemName = document.querySelector('.cartItemNamePrice h2');
+	const cartItemPrice = document.querySelector('.cartItemNamePrice h4');
 }

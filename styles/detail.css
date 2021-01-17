@@ -11,8 +11,8 @@
 }
 
 .pageId div {
-   color: white;
-   width: 25px;
+	color: white;
+	width: 25px;
 }
 .pageId svg {
 	cursor: pointer;
@@ -86,8 +86,8 @@
 .detailAddToCart .quantity input {
 	width: 20px;
 	padding: 5px;
-   margin: 0 10px;
-   text-align: center;
+	margin: 0 10px;
+	text-align: center;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -141,8 +141,7 @@ input[type='number'] {
 	align-items: center;
 	width: 80%;
 	justify-content: center;
-   transition: 0.3s ease-in-out all;
-   
+	transition: 0.3s ease-in-out all;
 }
 
 .detailAddToCart .addToCartButton:hover,
@@ -151,6 +150,50 @@ input[type='number'] {
 }
 
 .addToCartButton p {
-   margin-right: 5px;
-   font-weight: 600;
+	margin-right: 5px;
+	font-weight: 600;
 }
+
+.addToNotifContainer {
+	background-color: white;
+	/* margin: 100px; */
+	/* width: 300px; */
+	position: fixed;
+	top: -130px;
+	left: 100px;
+	right: 100px;
+	display: grid;
+	grid-template-columns: 60px 200px;
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	gap: 5px;
+	/* justify-items: ; */
+	align-items: center;
+	justify-content: space-between;
+   z-index: 3;
+   transition: 1s ease-in-out all;
+}
+
+.addToNotifContainer.active {
+   top: 30px;
+	left: 100px;
+	right: 100px;
+}
+
+.addToNotifContainer img {
+	width: 100%;
+	/* width: 50px; */
+}
+
+.textNotif h3 {
+	/* background-color: red; */
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+
+.textNotif p {
+	font-size: 12px;
+}
+
+
