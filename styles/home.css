@@ -147,10 +147,11 @@ input:focus {
 
 .banner h3 {
    color: #4649a0;
-   font-size: 1.3em;
-   max-width: 200px;
+   font-size: 1.2em;
+   max-width: 190px;
    width: 100%;
    font-weight: bolder;
+   /* border: 1px solid red; */
 }
 
 .banner span {
@@ -165,8 +166,8 @@ input:focus {
    /* justify-content: space-between; */
    margin: 20px 0 60px 0;
    display: grid;
-   grid-template-columns: repeat(3, minmax(50px, 1fr));
-   grid-template-rows: repeat(1, minmax(175px, 1fr));
+   grid-template-columns: repeat(3, minmax(70px, 1fr));
+   grid-template-rows: repeat(1, minmax(170px, 2fr));
    /* border: 1px solid red; */
    justify-items: center;
    gap: 15px;
@@ -186,6 +187,7 @@ input:focus {
 }
 
 .kategori h3 {
+   /* border: 1px solid red; */
    color: #4649a0;
    /* font-weight: 700; */
 }
@@ -201,9 +203,10 @@ input:focus {
 
 .card a {
    /* background-color: red; */
-   padding: 15px;
+   padding: 10px 5px;
    display: block;
    width: 100%;
+   /* max-width: max-content; */
    height: 100%;
    text-decoration: none;
    font-weight: 700;
