@@ -255,17 +255,14 @@ async function getAllDetailElements({
 async function getAllCartElements(buttonEl) {
 	let deleteButton = document.querySelector('.deleteButton');
 	let cartTotalPayment = document.querySelector('.cartTotalPayment');
+	const cartContainer = document.querySelector('.cartContainer');
+	let data = await readAllData();
 	async function renderCartElements() {
-		let data = await readAllData();
-		const cartContainer = document.querySelector('.cartContainer');
-		if (data[0] === undefined) {
-         cartTotalPayment.classList.remove('active');
-			deleteButton.classList.remove('active');
-			cartContainer.innerHTML = `
-            <p class="ifCartKosong">Keranjang kamu kosong...</p>`;
+		let isDataEmpty = checkIsDataEmpty(data);
+		// console.log(isDataEmpty);
+		if (isDataEmpty) {
+			return;
 		} else {
-			cartTotalPayment.classList.add('active');
-			deleteButton.classList.add('active');
 			data.forEach((data) => {
 				cartContainer.innerHTML += `
                <div class="cartItem">
@@ -294,8 +291,7 @@ async function getAllCartElements(buttonEl) {
                         </div>
                      </div>
                   </div>
-               </div>
-         `;
+               </div>`;
 			});
 		}
 
@@ -335,8 +331,20 @@ async function getAllCartElements(buttonEl) {
 						let data =
 							input.parentElement.parentElement.children[1].children[0]
 								.textContent;
+						const addToNotifContainer = document.querySelector(
+							'.addToNotifContainer'
+						);
+						const imgNotif = document.querySelector('.imgNotif img');
+						const textNotif = document.querySelector('.textNotif p');
+						textNotif.innerHTML = `Berhasil dihapus dari keranjang`;
+						imgNotif.setAttribute('src', `img/icons/check2.svg`);
+						addToNotifContainer.classList.add('active');
+						setTimeout(() => {
+							addToNotifContainer.classList.remove('active');
+						}, 2000);
 						deleteData(data);
 						parentElOfChecked.remove();
+						fetching('cart');
 					}
 				});
 			});
@@ -346,6 +354,21 @@ async function getAllCartElements(buttonEl) {
 	}
 
 	renderCartElements();
+
+	function checkIsDataEmpty(data) {
+		// console.log('tes');
+		if (data[0] === undefined) {
+			cartTotalPayment.classList.remove('active');
+			deleteButton.classList.remove('active');
+			cartContainer.innerHTML = `
+            <p class="ifCartKosong">Keranjang kamu kosong...</p>`;
+			return true;
+		} else {
+			cartTotalPayment.classList.add('active');
+			deleteButton.classList.add('active');
+			return false;
+		}
+	}
 
 	function getThisOnCart(el) {
 		if (el.className === 'cartItem') {
