@@ -253,95 +253,134 @@ async function getAllDetailElements({
 }
 
 async function getAllCartElements(buttonEl) {
-   async function renderCartElements() {
-      let data = await readAllData();
-      const cartContainer = document.querySelector('.cartContainer');
-      if (data[0] === undefined) {
-         cartContainer.innerHTML = `
-            <p class="ifCartKosong">Keranjang kamu kosong...</p>
-         
-         `;
-      }
-      data.forEach((data) => {
-         cartContainer.innerHTML += `
-            <div class="cartItem">
-               <div class="cartItemImg">
-                  <img src="${data.itemImg}" alt="${data.itemName}" />
-               </div>
-               <div class="cartItemNamePrice">
-                  <h2>${data.itemName}</h2>
-                  <h4>${data.itemPrice}</h4>
-               </div>
-               <div class="cartCheck">
-                  <input type="checkbox" name="checkbox" id="checkbox" />
-                  <div class="quantity">
-                     <div class="qButton kurang">
-                        <h2>-</h2>
-                     </div>
-                     <input
-                        type="number"
-                        name="quantity"
-                        min="1"
-                        max="10"
-                        value="${data.itemQuantity}"
-                     />
-                     <div class="qButton tambah">
-                        <h2>+</h2>
+	let deleteButton = document.querySelector('.deleteButton');
+	let cartTotalPayment = document.querySelector('.cartTotalPayment');
+	async function renderCartElements() {
+		let data = await readAllData();
+		const cartContainer = document.querySelector('.cartContainer');
+		if (data[0] === undefined) {
+         cartTotalPayment.classList.remove('active');
+			deleteButton.classList.remove('active');
+			cartContainer.innerHTML = `
+            <p class="ifCartKosong">Keranjang kamu kosong...</p>`;
+		} else {
+			cartTotalPayment.classList.add('active');
+			deleteButton.classList.add('active');
+			data.forEach((data) => {
+				cartContainer.innerHTML += `
+               <div class="cartItem">
+                  <div class="cartItemImg">
+                     <img src="${data.itemImg}" alt="${data.itemName}" />
+                  </div>
+                  <div class="cartItemNamePrice">
+                     <h2>${data.itemName}</h2>
+                     <h4>${data.itemPrice}</h4>
+                  </div>
+                  <div class="cartCheck">
+                     <input type="checkbox" name="checkbox" id="checkbox" />
+                     <div class="quantity">
+                        <div class="qButton kurang">
+                           <h2>-</h2>
+                        </div>
+                        <input
+                           type="number"
+                           name="quantity"
+                           min="1"
+                           max="10"
+                           value="${data.itemQuantity}"
+                        />
+                        <div class="qButton tambah">
+                           <h2>+</h2>
+                        </div>
                      </div>
                   </div>
                </div>
-            </div>
-      `;
-      });
+         `;
+			});
+		}
 
-      const minButton = document.querySelectorAll('.cartCheck .kurang');
-      const addButton = document.querySelectorAll('.cartCheck .tambah');
+		const minButton = document.querySelectorAll('.cartCheck .kurang');
+		const addButton = document.querySelectorAll('.cartCheck .tambah');
 
-      addButton.forEach(function (add) {
-         add.addEventListener('click', function (e) {
-            const input = this.parentElement.children[1]
-            let value = parseInt(input.value)
-            value += 1;
-            input.value = `${value}`;
-            let data =getThisOnCart(this)
-            storeData(data);
-         });
-      });
-      minButton.forEach(function (min) {
-         min.addEventListener('click', function (e)  {
-            let input = this.parentElement.children[1]
-            let value = parseInt(input.value)
-            if (value === 1) return;
-            value -= 1;
-            input.value = `${value}`;
-            let data =getThisOnCart(this)
-            storeData(data);
-         });
-      });
-   }
+		addButton.forEach(function (add) {
+			add.addEventListener('click', function (e) {
+				const input = this.parentElement.children[1];
+				let value = parseInt(input.value);
+				value += 1;
+				input.value = `${value}`;
+				let data = getThisOnCart(this);
+				storeData(data);
+			});
+		});
+		minButton.forEach(function (min) {
+			min.addEventListener('click', function (e) {
+				let input = this.parentElement.children[1];
+				let value = parseInt(input.value);
+				if (value === 1) return;
+				value -= 1;
+				input.value = `${value}`;
+				let data = getThisOnCart(this);
+				storeData(data);
+			});
+		});
 
-   renderCartElements();
+		async function ifCartChecked() {
+			let deleteButton = document.querySelector('.deleteButton');
+			let inputCheck = document.querySelectorAll('#checkbox');
+			deleteButton.addEventListener('click', function (e) {
+				alert('Yakin ingin menghapus item dari keranjang?');
+				inputCheck.forEach(function (input) {
+					if (input.checked === true) {
+						let parentElOfChecked = input.parentElement.parentElement;
+						let data =
+							input.parentElement.parentElement.children[1].children[0]
+								.textContent;
+						deleteData(data);
+						parentElOfChecked.remove();
+					}
+				});
+			});
+		}
 
-   function getThisOnCart(el) {
-      const imgCart = el.parentElement.parentElement.parentElement.children[0].children[0].getAttribute('src')
-      const nameCart = el.parentElement.parentElement.parentElement.children[1].children[0]
-         .textContent;
-      const priceCart = el.parentElement.parentElement.parentElement.children[1].children[1]
-      .textContent;
-      const quantityCart = el.parentElement.children[1].value;
-      let item = {
-         itemName: nameCart,
-         itemPrice: priceCart,
-         itemImg: imgCart,
-         itemQuantity: quantityCart,
-      };
-      return item
-   }
- 
+		ifCartChecked();
+	}
 
+	renderCartElements();
 
-   
-   
+	function getThisOnCart(el) {
+		if (el.className === 'cartItem') {
+			const imgCart = el.children[0].children[0].getAttribute('src');
+			const nameCart = el.children[1].children[0].textContent;
+			const priceCart = el.children[1].children[1].textContent;
+			const quantityCart = el.children[1].value;
+			let item = {
+				itemName: nameCart,
+				itemPrice: priceCart,
+				itemImg: imgCart,
+				itemQuantity: quantityCart,
+			};
+			return item;
+		} else {
+			const imgCart = el.parentElement.parentElement.parentElement.children[0].children[0].getAttribute(
+				'src'
+			);
+			const nameCart =
+				el.parentElement.parentElement.parentElement.children[1].children[0]
+					.textContent;
+			const priceCart =
+				el.parentElement.parentElement.parentElement.children[1].children[1]
+					.textContent;
+			const quantityCart = el.parentElement.children[1].value;
+			let item = {
+				itemName: nameCart,
+				itemPrice: priceCart,
+				itemImg: imgCart,
+				itemQuantity: quantityCart,
+			};
+
+			return item;
+		}
+	}
 
 	const cartItemImg = document.querySelector('.cartItemImg img');
 	const cartItemName = document.querySelector('.cartItemNamePrice h2');

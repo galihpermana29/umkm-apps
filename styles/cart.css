@@ -148,6 +148,11 @@ input[type=checkbox] {
    left: 0;
    right: 0; */
    /* background-color: white; */
+   visibility: hidden;
+}
+
+.cartTotalPayment.active {
+   visibility: visible;
 }
 
 .paymentButton {
@@ -184,6 +189,11 @@ input[type=checkbox] {
    width: max-content;
    margin: 0 auto;
    padding-top: 10px;
+   visibility: hidden;
+}
+
+.deleteButton.active {
+   visibility: visible;
 }
 
 .deleteButton p {
