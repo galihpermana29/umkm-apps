@@ -228,16 +228,18 @@ async function getAllDetailElements({
 			.textContent;
 		const priceCart = this.parentElement.parentElement.children[1].children[1]
 			.textContent;
-      const quantityCart = this.parentElement.children[0].children[1].value;
-      const imgNotif = document.querySelector('.imgNotif img')
-      const textNotif = document.querySelector('.textNotif h3')
-      const addToNotifContainer = document.querySelector('.addToNotifContainer')
-      imgNotif.setAttribute('src', `${imgCart}`)
-      textNotif.innerHTML = `${nameCart}`
-      addToNotifContainer.classList.add('active')
-      setTimeout(() => {
-         addToNotifContainer.classList.remove('active')
-      }, 2000);
+		const quantityCart = this.parentElement.children[0].children[1].value;
+		const imgNotif = document.querySelector('.imgNotif img');
+		const textNotif = document.querySelector('.textNotif h3');
+		const addToNotifContainer = document.querySelector(
+			'.addToNotifContainer'
+		);
+		imgNotif.setAttribute('src', `${imgCart}`);
+		textNotif.innerHTML = `${nameCart}`;
+		addToNotifContainer.classList.add('active');
+		setTimeout(() => {
+			addToNotifContainer.classList.remove('active');
+		}, 2000);
 		let item = {
 			itemName: nameCart,
 			itemPrice: priceCart,
@@ -251,46 +253,95 @@ async function getAllDetailElements({
 }
 
 async function getAllCartElements(buttonEl) {
-	let data = await readAllData();
-	console.log(data[0]);
-   const cartContainer = document.querySelector('.cartContainer');
-   if(data[0] === undefined) {
-      cartContainer.innerHTML = `
-         <p class="ifCartKosong">Keranjang kamu kosong...</p>
-      
-      `
-   }
-	data.forEach((data) => {
-		cartContainer.innerHTML += `
-         <div class="cartItem">
-            <div class="cartItemImg">
-               <img src="${data.itemImg}" alt="${data.itemName}" />
-            </div>
-            <div class="cartItemNamePrice">
-               <h2>${data.itemName}</h2>
-               <h4>${data.itemPrice}</h4>
-            </div>
-            <div class="cartCheck">
-               <input type="checkbox" name="checkbox" id="checkbox" />
-               <div class="quantity">
-                  <div class="qButton kurang">
-                     <h2>-</h2>
-                  </div>
-                  <input
-                     type="number"
-                     name="quantity"
-                     min="1"
-                     max="10"
-                     value="${data.itemQuantity}"
-                  />
-                  <div class="qButton tambah">
-                     <h2>+</h2>
+   async function renderCartElements() {
+      let data = await readAllData();
+      const cartContainer = document.querySelector('.cartContainer');
+      if (data[0] === undefined) {
+         cartContainer.innerHTML = `
+            <p class="ifCartKosong">Keranjang kamu kosong...</p>
+         
+         `;
+      }
+      data.forEach((data) => {
+         cartContainer.innerHTML += `
+            <div class="cartItem">
+               <div class="cartItemImg">
+                  <img src="${data.itemImg}" alt="${data.itemName}" />
+               </div>
+               <div class="cartItemNamePrice">
+                  <h2>${data.itemName}</h2>
+                  <h4>${data.itemPrice}</h4>
+               </div>
+               <div class="cartCheck">
+                  <input type="checkbox" name="checkbox" id="checkbox" />
+                  <div class="quantity">
+                     <div class="qButton kurang">
+                        <h2>-</h2>
+                     </div>
+                     <input
+                        type="number"
+                        name="quantity"
+                        min="1"
+                        max="10"
+                        value="${data.itemQuantity}"
+                     />
+                     <div class="qButton tambah">
+                        <h2>+</h2>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-   `;
-	});
+      `;
+      });
+
+      const minButton = document.querySelectorAll('.cartCheck .kurang');
+      const addButton = document.querySelectorAll('.cartCheck .tambah');
+
+      addButton.forEach(function (add) {
+         add.addEventListener('click', function (e) {
+            const input = this.parentElement.children[1]
+            let value = parseInt(input.value)
+            value += 1;
+            input.value = `${value}`;
+            let data =getThisOnCart(this)
+            storeData(data);
+         });
+      });
+      minButton.forEach(function (min) {
+         min.addEventListener('click', function (e)  {
+            let input = this.parentElement.children[1]
+            let value = parseInt(input.value)
+            if (value === 1) return;
+            value -= 1;
+            input.value = `${value}`;
+            let data =getThisOnCart(this)
+            storeData(data);
+         });
+      });
+   }
+
+   renderCartElements();
+
+   function getThisOnCart(el) {
+      const imgCart = el.parentElement.parentElement.parentElement.children[0].children[0].getAttribute('src')
+      const nameCart = el.parentElement.parentElement.parentElement.children[1].children[0]
+         .textContent;
+      const priceCart = el.parentElement.parentElement.parentElement.children[1].children[1]
+      .textContent;
+      const quantityCart = el.parentElement.children[1].value;
+      let item = {
+         itemName: nameCart,
+         itemPrice: priceCart,
+         itemImg: imgCart,
+         itemQuantity: quantityCart,
+      };
+      return item
+   }
+ 
+
+
+   
+   
 
 	const cartItemImg = document.querySelector('.cartItemImg img');
 	const cartItemName = document.querySelector('.cartItemNamePrice h2');
