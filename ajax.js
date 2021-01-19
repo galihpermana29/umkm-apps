@@ -1,49 +1,8 @@
+import items from './js/item.js';
+import { getThisEl } from './js/getThis.js';
+
 const container = document.querySelector('.container');
 const icons = document.querySelectorAll('.icon');
-const items = [
-	{
-		imageName: 'kursi_estetik',
-		itemName: 'Kursi Minimalis',
-		priceItem: 200,
-		descItem:
-			'Merupakan kursi minimalis yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Kursi ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang simple tetapi elegan',
-	},
-	{
-		imageName: 'lampu-belajar',
-		itemName: 'Lampu Belajar',
-		priceItem: 180,
-		descItem:
-			'Lampu belajar ini mempunyai pencahayaan yang pas untuk belajar di malam hari, bobotnya yang ringan juga membuat lampu belajar ini bisa di bawa kemana saja dan di pindahkan dimana saja.',
-	},
-	{
-		imageName: 'jam',
-		itemName: 'Jam Dinding',
-		priceItem: 70,
-		descItem:
-			'Jam dinding kayu yang dibuat dengan kayu mahoni dengan konsep simple. Cocok untuk rumah yang ingin memliki nuansa kayu dan elegan.',
-	},
-	{
-		imageName: 'meja_cafe',
-		itemName: 'Meja Kafe',
-		priceItem: 100,
-		descItem:
-			'Merupakan meja yang bisa digunakan di segala tempat. Kursi ini dibuat dengan menggunakan kayu yang berkualitas tinggi. Meja ini sangat cocok bagi kalian yang ingin mempunyai rumah dengan view yang bebas dan santai',
-	},
-	{
-		imageName: 'phone_holder',
-		itemName: 'Penyanggah Hp',
-		priceItem: 50,
-		descItem:
-			'Penyanggah hp yang bisa digunakan sebagai sandaran hp kamu ketika ingin menonton film, konferensi zoom, atau mengecas. Dibuat menggunakan kayu bakau, sehingga sangat kuat dan pas untuk tipe hp apapun',
-	},
-	{
-		imageName: 'tempat_pisau',
-		itemName: 'Tempat Pisau',
-		priceItem: 40,
-		descItem:
-			'Letakkan pisau dapurmu pada tempat yang sesuai, ini memudahkan kamu dalam mengambil dan mencari nya. Tempat pisau ini di desain agar pengguna tidak bingung menyimpan pisaunya.',
-	},
-];
 
 function fetching(name, options) {
 	let xhr = new XMLHttpRequest();
@@ -150,9 +109,9 @@ function getAllKerajinanElements(name) {
 		cardItems.forEach(function (item) {
 			item.addEventListener('click', function (e) {
 				if (this.className === 'cardItems') {
-					const imgClickName = this.children[0].attributes[0].value;
-					const itemClickName = this.children[1].children[0].textContent;
-					const priceClickName = this.children[1].children[1].textContent;
+					let thisElement = getThisEl(this);
+
+					let { itemName, itemPrice, itemImg, itemQuantity } = thisElement;
 					let favStatus = false;
 
 					if (this.nextElementSibling.classList[0] === 'fav') {
@@ -160,9 +119,9 @@ function getAllKerajinanElements(name) {
 					}
 
 					let itemProperties = {
-						imageClickedName: imgClickName,
-						itemClickedName: itemClickName,
-						priceClickedName: priceClickName,
+						imageClickedName: itemImg,
+						itemClickedName: itemName,
+						priceClickedName: itemPrice,
 						favClickedStatus: favStatus,
 					};
 
@@ -220,33 +179,14 @@ async function getAllDetailElements({
 		val -= 1;
 		qInput.value = `${val}`;
 	});
+
 	addToCartButton.addEventListener('click', function (e) {
-		const imgCart = this.parentElement.parentElement.children[0].children[0].getAttribute(
-			'src'
+		let thisElement = getThisEl(
+			this.parentElement.parentElement,
+			this.parentElement
 		);
-		const nameCart = this.parentElement.parentElement.children[1].children[0]
-			.textContent;
-		const priceCart = this.parentElement.parentElement.children[1].children[1]
-			.textContent;
-		const quantityCart = this.parentElement.children[0].children[1].value;
-		const imgNotif = document.querySelector('.imgNotif img');
-		const textNotif = document.querySelector('.textNotif h3');
-		const addToNotifContainer = document.querySelector(
-			'.addToNotifContainer'
-		);
-		imgNotif.setAttribute('src', `${imgCart}`);
-		textNotif.innerHTML = `${nameCart}`;
-		addToNotifContainer.classList.add('active');
-		setTimeout(() => {
-			addToNotifContainer.classList.remove('active');
-		}, 2000);
-		let item = {
-			itemName: nameCart,
-			itemPrice: priceCart,
-			itemImg: imgCart,
-			itemQuantity: quantityCart,
-		};
-		storeData(item);
+		showNotification(thisElement);
+		storeData(thisElement);
 	});
 
 	renderDetailItem();
@@ -256,10 +196,10 @@ async function getAllCartElements(buttonEl) {
 	let deleteButton = document.querySelector('.deleteButton');
 	let cartTotalPayment = document.querySelector('.cartTotalPayment');
 	const cartContainer = document.querySelector('.cartContainer');
+
 	let data = await readAllData();
 	async function renderCartElements() {
 		let isDataEmpty = checkIsDataEmpty(data);
-		// console.log(isDataEmpty);
 		if (isDataEmpty) {
 			return;
 		} else {
@@ -304,7 +244,11 @@ async function getAllCartElements(buttonEl) {
 				let value = parseInt(input.value);
 				value += 1;
 				input.value = `${value}`;
-				let data = getThisOnCart(this);
+
+				let data = getThisEl(
+					this.parentElement.parentElement.parentElement,
+					this.parentElement.parentElement
+				);
 				storeData(data);
 			});
 		});
@@ -315,7 +259,11 @@ async function getAllCartElements(buttonEl) {
 				if (value === 1) return;
 				value -= 1;
 				input.value = `${value}`;
-				let data = getThisOnCart(this);
+
+				let data = getThisEl(
+					this.parentElement.parentElement.parentElement,
+					this.parentElement.parentElement
+				);
 				storeData(data);
 			});
 		});
@@ -324,24 +272,19 @@ async function getAllCartElements(buttonEl) {
 			let deleteButton = document.querySelector('.deleteButton');
 			let inputCheck = document.querySelectorAll('#checkbox');
 			deleteButton.addEventListener('click', function (e) {
-				alert('Yakin ingin menghapus item dari keranjang?');
+				// alert('Yakin ingin menghapus item dari keranjang?');
 				inputCheck.forEach(function (input) {
 					if (input.checked === true) {
 						let parentElOfChecked = input.parentElement.parentElement;
 						let data =
 							input.parentElement.parentElement.children[1].children[0]
 								.textContent;
-						const addToNotifContainer = document.querySelector(
-							'.addToNotifContainer'
-						);
-						const imgNotif = document.querySelector('.imgNotif img');
-						const textNotif = document.querySelector('.textNotif p');
-						textNotif.innerHTML = `Berhasil dihapus dari keranjang`;
-						imgNotif.setAttribute('src', `img/icons/check2.svg`);
-						addToNotifContainer.classList.add('active');
-						setTimeout(() => {
-							addToNotifContainer.classList.remove('active');
-						}, 2000);
+						let itemSuccess = {
+							itemName: 'Item',
+							itemPric: '0',
+							itemImg: 'img/icons/check2.svg',
+						};
+						showNotification(itemSuccess);
 						deleteData(data);
 						parentElOfChecked.remove();
 						fetching('cart');
@@ -349,14 +292,12 @@ async function getAllCartElements(buttonEl) {
 				});
 			});
 		}
-
 		ifCartChecked();
 	}
 
 	renderCartElements();
 
 	function checkIsDataEmpty(data) {
-		// console.log('tes');
 		if (data[0] === undefined) {
 			cartTotalPayment.classList.remove('active');
 			deleteButton.classList.remove('active');
@@ -370,42 +311,39 @@ async function getAllCartElements(buttonEl) {
 		}
 	}
 
-	function getThisOnCart(el) {
-		if (el.className === 'cartItem') {
-			const imgCart = el.children[0].children[0].getAttribute('src');
-			const nameCart = el.children[1].children[0].textContent;
-			const priceCart = el.children[1].children[1].textContent;
-			const quantityCart = el.children[1].value;
-			let item = {
-				itemName: nameCart,
-				itemPrice: priceCart,
-				itemImg: imgCart,
-				itemQuantity: quantityCart,
-			};
-			return item;
-		} else {
-			const imgCart = el.parentElement.parentElement.parentElement.children[0].children[0].getAttribute(
-				'src'
-			);
-			const nameCart =
-				el.parentElement.parentElement.parentElement.children[1].children[0]
-					.textContent;
-			const priceCart =
-				el.parentElement.parentElement.parentElement.children[1].children[1]
-					.textContent;
-			const quantityCart = el.parentElement.children[1].value;
-			let item = {
-				itemName: nameCart,
-				itemPrice: priceCart,
-				itemImg: imgCart,
-				itemQuantity: quantityCart,
-			};
+	// const cartItemImg = document.querySelector('.cartItemImg img');
+	// const cartItemName = document.querySelector('.cartItemNamePrice h2');
+	// const cartItemPrice = document.querySelector('.cartItemNamePrice h4');
+}
 
-			return item;
-		}
+
+
+function showNotification({ itemName, itemPrice, itemImg, itemQuantity }) {
+	const addToNotifContainer = document.querySelector('.addToNotifContainer');
+	let itemDesc = 'Berhasil di tambahkan ke keranjang';
+	if (itemName !== 'Item') {
+		addToNotifContainer.innerHTML = `
+         <div class="imgNotif">
+            <img src="${itemImg}" alt="${itemName}">
+         </div>
+         <div class="textNotif">
+            <h3>${itemName}</h3>
+            <p>${itemDesc}</p>
+         </div>`;
+	} else {
+		itemDesc = 'Berhasil dihapus dari keranjang';
+		addToNotifContainer.innerHTML = `
+         <div class="imgNotif">
+            <img src="${itemImg}" alt="${itemName}">
+         </div>
+         <div class="textNotif">
+            <h3>${itemName}</h3>
+            <p>${itemDesc}</p>
+         </div>`;
 	}
 
-	const cartItemImg = document.querySelector('.cartItemImg img');
-	const cartItemName = document.querySelector('.cartItemNamePrice h2');
-	const cartItemPrice = document.querySelector('.cartItemNamePrice h4');
+	addToNotifContainer.classList.add('active');
+	setTimeout(() => {
+		addToNotifContainer.classList.remove('active');
+	}, 2000);
 }
