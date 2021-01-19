@@ -1,6 +1,8 @@
 import items from './js/item.js';
 import { getThisEl } from './js/getThis.js';
 
+let totalItemPrice = [];
+
 const container = document.querySelector('.container');
 const icons = document.querySelectorAll('.icon');
 
@@ -196,8 +198,8 @@ async function getAllCartElements(buttonEl) {
 	let deleteButton = document.querySelector('.deleteButton');
 	let cartTotalPayment = document.querySelector('.cartTotalPayment');
 	const cartContainer = document.querySelector('.cartContainer');
-
 	let data = await readAllData();
+
 	async function renderCartElements() {
 		let isDataEmpty = checkIsDataEmpty(data);
 		if (isDataEmpty) {
@@ -271,8 +273,8 @@ async function getAllCartElements(buttonEl) {
 		async function ifCartChecked() {
 			let deleteButton = document.querySelector('.deleteButton');
 			let inputCheck = document.querySelectorAll('#checkbox');
+
 			deleteButton.addEventListener('click', function (e) {
-				// alert('Yakin ingin menghapus item dari keranjang?');
 				inputCheck.forEach(function (input) {
 					if (input.checked === true) {
 						let parentElOfChecked = input.parentElement.parentElement;
@@ -291,7 +293,48 @@ async function getAllCartElements(buttonEl) {
 					}
 				});
 			});
+			let totalPaymentEl = document.querySelector('.totalPayment p');
+			inputCheck.forEach(async function (cartInput) {
+				cartInput.addEventListener('click', async function (e) {
+					if (this.checked === true) {
+						let data = this.parentElement.parentElement.children[1]
+							.children[0].textContent;
+						let dataChecked = await readData(data);
+						let price = dataChecked.itemPrice.split('k');
+						let totalPaymentSum = totalPayment(
+							parseInt(price[0]),
+							parseInt(dataChecked.itemQuantity)
+						);
+						totalPaymentEl.innerHTML = `Rp${totalPaymentSum}`;
+                  this.nextElementSibling.children[0].style.display = "none"
+                  this.nextElementSibling.children[2].style.display = "none"
+                  this.nextElementSibling.children[1].disabled = true
+
+					} else {
+						let data = this.parentElement.parentElement.children[1]
+							.children[0].textContent;
+						let dataChecked = await readData(data);
+						let price = dataChecked.itemPrice.split('k');
+						let totalPaymentMin = minPayment(
+							parseInt(price[0]),
+							parseInt(dataChecked.itemQuantity)
+						);
+                  totalPaymentEl.innerHTML = `Rp${totalPaymentMin}`;
+                  this.nextElementSibling.children[0].style.display = "inherit"
+                  this.nextElementSibling.children[2].style.display = "inherit"
+                  this.nextElementSibling.children[1].disabled = false
+					}
+				});
+			});
+
+			// const paymentButton = document.querySelector('.paymentButton');
+			// paymentButton.addEventListener('click', async function (e) {
+			// 	inputCheck.forEach(async function (input) {
+
+			// 	});
+			// });
 		}
+
 		ifCartChecked();
 	}
 
@@ -310,13 +353,31 @@ async function getAllCartElements(buttonEl) {
 			return false;
 		}
 	}
-
-	// const cartItemImg = document.querySelector('.cartItemImg img');
-	// const cartItemName = document.querySelector('.cartItemNamePrice h2');
-	// const cartItemPrice = document.querySelector('.cartItemNamePrice h4');
 }
 
+function totalPayment(price, quantity) {
+	let itemTotal = price * quantity * 1000;
+	totalItemPrice.push(itemTotal);
+	let sum = totalItemPrice.reduce((acc, curr) => {
+		return acc + curr;
+	});
+	return sum;
+}
 
+function minPayment(price, quantity) {
+	let itemTotal = price * quantity * 1000;
+	let find = totalItemPrice.indexOf(itemTotal);
+	totalItemPrice.splice(find, 1);
+	let sum;
+	if (totalItemPrice[0] !== undefined) {
+		sum = totalItemPrice.reduce((acc, curr) => {
+			return acc + curr;
+		});
+		return sum;
+	} else {
+		return 0;
+	}
+}
 
 function showNotification({ itemName, itemPrice, itemImg, itemQuantity }) {
 	const addToNotifContainer = document.querySelector('.addToNotifContainer');
