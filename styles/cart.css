@@ -1,17 +1,10 @@
 .cartEl {
    position: relative;
-   /* border: 1px solid blue; */
-   /* height: 90vh; */
 }
 
 .cartContainer {
    display: grid;
-   /* justify-content: center; */
-   /* align-content: center; */
    justify-items: center;
-   /* margin-bottom: 70px; */
-   /* border: 1px solid red; */
-   /* height: 500px; */
 }
 
 .cartItem {

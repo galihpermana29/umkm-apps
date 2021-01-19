@@ -203,6 +203,7 @@ async function getAllCartElements(buttonEl) {
 	async function renderCartElements() {
 		let isDataEmpty = checkIsDataEmpty(data);
 		if (isDataEmpty) {
+         totalItemPrice = [];
 			return;
 		} else {
 			data.forEach((data) => {
@@ -216,7 +217,7 @@ async function getAllCartElements(buttonEl) {
                      <h4>${data.itemPrice}</h4>
                   </div>
                   <div class="cartCheck">
-                     <input type="checkbox" name="checkbox" id="checkbox" />
+                     <input type="checkbox" name="checkbox" id="checkbox"/>
                      <div class="quantity">
                         <div class="qButton kurang">
                            <h2>-</h2>
@@ -273,6 +274,7 @@ async function getAllCartElements(buttonEl) {
 		async function ifCartChecked() {
 			let deleteButton = document.querySelector('.deleteButton');
 			let inputCheck = document.querySelectorAll('#checkbox');
+         const paymentButton = document.querySelector('.paymentButton');
 
 			deleteButton.addEventListener('click', function (e) {
 				inputCheck.forEach(function (input) {
@@ -309,6 +311,10 @@ async function getAllCartElements(buttonEl) {
                   this.nextElementSibling.children[0].style.display = "none"
                   this.nextElementSibling.children[2].style.display = "none"
                   this.nextElementSibling.children[1].disabled = true
+                  
+                  paymentButton.addEventListener('click', async function (e) {
+                     fetching('payment')
+                  });
 
 					} else {
 						let data = this.parentElement.parentElement.children[1]
@@ -327,12 +333,7 @@ async function getAllCartElements(buttonEl) {
 				});
 			});
 
-			// const paymentButton = document.querySelector('.paymentButton');
-			// paymentButton.addEventListener('click', async function (e) {
-			// 	inputCheck.forEach(async function (input) {
 
-			// 	});
-			// });
 		}
 
 		ifCartChecked();
