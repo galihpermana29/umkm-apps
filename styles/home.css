@@ -70,9 +70,10 @@ header img {
 }
 
 input:focus {
-   outline: none;
+   /* outline: none; */
    border: 1px solid #959beb;
    box-shadow: 2px 3px 15px rgba(208, 215, 255, 0.507);
+   background-color: white;
 }
 
 .searchBar input::-webkit-input-placeholder {
