@@ -15,7 +15,7 @@
    /* border: 1px solid red; */
    margin: 20px 0 0 0;
    padding: 10px 10px;
-   background-color: #E3E4F7;
+   /* background-color: #E3E4F7; */
    border-radius: 10px;
    /* justify-items: spac; */
    align-items: center;
@@ -24,8 +24,14 @@
    align-content: center;
    /* justify-content: space-between; */
    /* gap: 10px; */
-   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.05);
+   
    position: relative;
+   border: 1px solid #4649a0;
+   transition: .3s ease all;
+}
+
+.cartItem.active {
+   transform: scale(1.05);
 }
 
 .cartItemImg img {

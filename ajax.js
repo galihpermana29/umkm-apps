@@ -312,7 +312,7 @@ async function getAllCartElements(buttonEl) {
                   this.nextElementSibling.children[0].style.display = "none"
                   this.nextElementSibling.children[2].style.display = "none"
                   this.nextElementSibling.children[1].disabled = true
-                  
+                  this.parentElement.parentElement.classList.add('active')
                   paymentButton.addEventListener('click', async function (e) {
                      totalItemPrice = [];
                      fetching('payment')
@@ -331,6 +331,7 @@ async function getAllCartElements(buttonEl) {
                   this.nextElementSibling.children[0].style.display = "inherit"
                   this.nextElementSibling.children[2].style.display = "inherit"
                   this.nextElementSibling.children[1].disabled = false
+                  this.parentElement.parentElement.classList.remove('active')
 					}
 				});
 			});
