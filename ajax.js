@@ -290,7 +290,8 @@ async function getAllCartElements(buttonEl) {
 						};
 						showNotification(itemSuccess);
 						deleteData(data);
-						parentElOfChecked.remove();
+                  parentElOfChecked.remove();
+                  totalItemPrice = [];
 						fetching('cart');
 					}
 				});
@@ -313,6 +314,7 @@ async function getAllCartElements(buttonEl) {
                   this.nextElementSibling.children[1].disabled = true
                   
                   paymentButton.addEventListener('click', async function (e) {
+                     totalItemPrice = [];
                      fetching('payment')
                   });
 
