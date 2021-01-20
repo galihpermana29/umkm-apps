@@ -64,8 +64,9 @@ header img {
    /* box-shadow: 2px 3px 50px rgba(0, 0, 0, 0.1); */
 	padding: 20px;
    box-sizing: border-box;
-   border: 1px solid #2227b4;
+   /* border: 1px solid #2227b4; */
    transition: .3s ease all;
+   background-color: rgb(247, 247, 247);
 }
 
 input:focus {
