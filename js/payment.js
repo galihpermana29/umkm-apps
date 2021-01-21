@@ -119,7 +119,7 @@ async function getAllPaymentElements(data, total) {
             };
             storeDataP(item);
             data.forEach(data => {
-               deleteData(data)
+               deleteData(data.itemName)
             })
             alert('Fitur sedang dikembangkan, terima kasih')
 			}
