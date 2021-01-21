@@ -3,6 +3,9 @@ import { getAllKerajinanElements } from './js/kerajinan.js';
 import { getAllDetailElements } from './js/detail.js';
 import { getAllCartElements } from './js/cart.js';
 import { getAllPaymentElements } from './js/payment.js';
+// import { v4 as uuidv4 } from '../uuid';
+
+
 
 const container = document.querySelector('.container');
 const icons = document.querySelectorAll('.icon');
@@ -55,5 +58,8 @@ function iconsOnClickAction() {
 
 fetching();
 iconsOnClickAction();
+
+
+
 
 export { fetching };

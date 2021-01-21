@@ -1,14 +1,14 @@
 import { fetching } from '../ajax.js';
+// const uuid = require('uuid')
+// uuid()
 
 async function getAllPaymentElements(data, total) {
 	const containerDescItem = document.querySelector('.itemDescBody .opsi');
 	const containerPaymentItem = document.querySelector(
 		'.paymentTotalPayment .totalPayment p'
-   );
-   const backButton = document.querySelector('.paymentEl .pageId svg')
+	);
+	const backButton = document.querySelector('.paymentEl .pageId svg');
 
-   
-   
 	async function renderPaymentItem(data, total) {
 		data.forEach((data) => {
 			containerDescItem.innerHTML += `
@@ -71,33 +71,82 @@ async function getAllPaymentElements(data, total) {
 				} else if (shippingCStatus === 0 || paymentCStatus === 0) {
 					alert('Pilih salah satu opsi yang tersedia');
 					return;
-				}
-         }
-
-         function checkTextareaStatus() {
-            let status = saveButton.parentElement.nextElementSibling.children[1]
-            .value
-            
-            if (status === '') {
-               alert('Isi alamat pengiriman')
-               return
             }
-         }
-         
-         checkCheckboxStatus();
-         checkTextareaStatus();
+            
+            let checkboxEl = []
+
+				if (shippingCStatus === 1 || paymentCStatus === 1) {
+					for (let i = 0; i < shippingCheckBoxEl.length; i++) {
+						if (shippingCheckBoxEl[i].checked === true) {
+							checkboxEl.push(shippingCheckBoxEl[i].previousElementSibling.textContent)
+						}
+
+						if (paymentCheckBoxEl[i].checked === true) {
+							checkboxEl.push(paymentCheckBoxEl[i].previousElementSibling.textContent)
+						}
+               }
+               return checkboxEl;
+            }
+            
+            
+			}
+
+			function checkTextareaStatus() {
+				let status =
+					saveButton.parentElement.nextElementSibling.children[1].value;
+
+				if (status === '') {
+					alert('Isi alamat pengiriman');
+					return;
+            } else {
+               return status;
+            }
+            
+			}
+
+			function getAllItemForStore() {
+            let checkboxEl = checkCheckboxStatus();
+            console.log(checkboxEl)
+            let addressOrder = checkTextareaStatus();
+            console.log(addressOrder)
+
+				let item = {
+					orderID: uuidv4(),
+					orderItem: data,
+					orderTotal: total,
+					orderShipping: checkboxEl[0],
+					orderPayment: checkboxEl[1],
+            };
+            storeDataP(item);
+            data.forEach(data => {
+               deleteData(data)
+            })
+            alert('Fitur sedang dikembangkan, terima kasih')
+			}
+
+			
+			
+			getAllItemForStore();
+			console.log(uuidv4());
 		}
 
 		saveButton.addEventListener('click', saveButtonAction);
 		paymentButton.addEventListener('click', onPaymentButtonClicked);
 	}
 
-
-   renderPaymentItem(data, total);
+	renderPaymentItem(data, total);
 	addressShipping();
-   backButton.addEventListener('click', function(e) {
-      fetching('cart')
-   })
+	backButton.addEventListener('click', function (e) {
+		fetching('cart');
+	});
+}
+
+function uuidv4() {
+	return 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+		var r = (Math.random() * 16) | 0,
+			v = c == 'x' ? r : (r & 0x3) | 0x8;
+		return v.toString(16);
+	});
 }
 
 export { getAllPaymentElements };
