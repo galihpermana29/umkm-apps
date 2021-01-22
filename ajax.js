@@ -3,6 +3,7 @@ import { getAllKerajinanElements } from './js/kerajinan.js';
 import { getAllDetailElements } from './js/detail.js';
 import { getAllCartElements } from './js/cart.js';
 import { getAllPaymentElements } from './js/payment.js';
+import { getAllPesananElements } from './js/pesanan.js';
 // import { v4 as uuidv4 } from '../uuid';
 
 
@@ -21,6 +22,7 @@ function fetching(name, options, options2) {
 				if (name === 'detail') getAllDetailElements(options);
 				if (name === 'cart') getAllCartElements(options);
 				if (name === 'payment') getAllPaymentElements(options, options2);
+				if (name === 'pesanan') getAllPesananElements(options, options2);
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
 			}

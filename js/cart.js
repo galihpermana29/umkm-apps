@@ -9,12 +9,15 @@ let itemCheckedGoToPayment = [];
 async function getAllCartElements(buttonEl) {
 	let deleteButton = document.querySelector('.deleteButton');
 	let cartTotalPayment = document.querySelector('.cartTotalPayment');
-   const cartContainer = document.querySelector('.cartContainer');
-   const backButton = document.querySelector('.cartEl .pageId svg')
+	const cartContainer = document.querySelector('.cartContainer');
+	const backButton = document.querySelector('.cartEl .pageId svg');
 	let data = await readAllData();
 	let totalUserPayForHisProd = 0;
 
 	async function renderCartElements() {
+		backButton.addEventListener('click', function (e) {
+			fetching('kerajinan');
+		});
 		let isDataEmpty = checkIsDataEmpty(data);
 		if (isDataEmpty) {
 			totalItemPrice = [];
@@ -97,12 +100,12 @@ async function getAllCartElements(buttonEl) {
 						let data =
 							input.parentElement.parentElement.children[1].children[0]
 								.textContent;
-						let itemSuccess = {
+						let notifProp = {
 							itemName: 'Item',
-							itemPric: '0',
+							itemPrice: '0',
 							itemImg: 'img/icons/check2.svg',
 						};
-						showNotification(itemSuccess);
+						showNotification(notifProp);
 						deleteData(data);
 						parentElOfChecked.remove();
 						totalItemPrice = [];
@@ -158,12 +161,12 @@ async function getAllCartElements(buttonEl) {
 						let hasil = await readData(data);
 						itemCheckedGoToPayment.push(hasil);
 					}
-            });
-            
-            if(totalUserPayForHisProd === 0) {
-               alert('Pilih item yang ingin di bayar')
-               return;
-            }
+				});
+
+				if (totalUserPayForHisProd === 0) {
+					alert('Pilih item yang ingin di bayar');
+					return;
+				}
 
 				fetching('payment', itemCheckedGoToPayment, totalUserPayForHisProd);
 
@@ -173,10 +176,7 @@ async function getAllCartElements(buttonEl) {
 			});
 		}
 
-      ifCartChecked();
-      backButton.addEventListener('click', function(e) {
-         fetching('kerajinan')
-      })
+		ifCartChecked();
 	}
 
 	function checkIsDataEmpty(data) {

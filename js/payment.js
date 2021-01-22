@@ -1,4 +1,5 @@
 import { fetching } from '../ajax.js';
+import { showNotification } from './showNotif.js';
 // const uuid = require('uuid')
 // uuid()
 
@@ -67,67 +68,75 @@ async function getAllPaymentElements(data, total) {
 
 				if (shippingCStatus === 2 || paymentCStatus === 2) {
 					alert('Pilih salah satu opsi saja');
-					return;
+					return false;
 				} else if (shippingCStatus === 0 || paymentCStatus === 0) {
 					alert('Pilih salah satu opsi yang tersedia');
-					return;
-            }
-            
-            let checkboxEl = []
+					return false;
+				}
+
+				let checkboxEl = [];
 
 				if (shippingCStatus === 1 || paymentCStatus === 1) {
 					for (let i = 0; i < shippingCheckBoxEl.length; i++) {
 						if (shippingCheckBoxEl[i].checked === true) {
-							checkboxEl.push(shippingCheckBoxEl[i].previousElementSibling.textContent)
+							checkboxEl.push(
+								shippingCheckBoxEl[i].previousElementSibling.textContent
+							);
 						}
 
 						if (paymentCheckBoxEl[i].checked === true) {
-							checkboxEl.push(paymentCheckBoxEl[i].previousElementSibling.textContent)
+							checkboxEl.push(
+								paymentCheckBoxEl[i].previousElementSibling.textContent
+							);
 						}
-               }
-               return checkboxEl;
-            }
-            
-            
+					}
+					return checkboxEl;
+				}
+				// return;
 			}
 
 			function checkTextareaStatus() {
 				let status =
 					saveButton.parentElement.nextElementSibling.children[1].value;
-
-				if (status === '') {
-					alert('Isi alamat pengiriman');
-					return;
-            } else {
-               return status;
-            }
-            
+				if (saveButton.textContent === 'Simpan') {
+					alert('Simpan alamat yang dimasukkan');
+					return false;
+				} else {
+					return status;
+				}
 			}
 
 			function getAllItemForStore() {
-            let checkboxEl = checkCheckboxStatus();
-            console.log(checkboxEl)
-            let addressOrder = checkTextareaStatus();
-            console.log(addressOrder)
-
-				let item = {
-					orderID: uuidv4(),
-					orderItem: data,
-					orderTotal: total,
-					orderShipping: checkboxEl[0],
-					orderPayment: checkboxEl[1],
-            };
-            storeDataP(item);
-            data.forEach(data => {
-               deleteData(data.itemName)
-            })
-            alert('Fitur sedang dikembangkan, terima kasih')
+				let checkboxEl = checkCheckboxStatus();
+				let addressOrder = checkTextareaStatus();
+				if (checkboxEl === false || addressOrder === false) {
+					return;
+				} else {
+					let item = {
+						orderID: uuidv4(),
+						orderItem: data,
+						orderTotal: total,
+						orderShipping: checkboxEl[0],
+						orderPayment: checkboxEl[1],
+						orderAddress: addressOrder,
+					};
+					storeDataP(item);
+					data.forEach((data) => {
+						deleteData(data.itemName);
+					});
+					let notifProp = {
+						itemName: 'Pesanan',
+						itemPrice: item.orderID,
+						itemImg: 'img/icons/check2.svg',
+					};
+					showNotification(notifProp);
+					setTimeout(() => {
+						fetching('pesanan');
+					}, 2500);
+				}
 			}
 
-			
-			
 			getAllItemForStore();
-			console.log(uuidv4());
 		}
 
 		saveButton.addEventListener('click', saveButtonAction);
@@ -142,11 +151,11 @@ async function getAllPaymentElements(data, total) {
 }
 
 function uuidv4() {
-	return 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+	return 'PKM-T-x-4xxx-yxxx'.replace(/[xy]/g, function (c) {
 		var r = (Math.random() * 16) | 0,
 			v = c == 'x' ? r : (r & 0x3) | 0x8;
 		return v.toString(16);
-	});
+	}).toUpperCase();
 }
 
 export { getAllPaymentElements };
