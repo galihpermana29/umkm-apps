@@ -3,6 +3,7 @@ import { getAllKerajinanElements } from './js/kerajinan.js';
 import { getAllDetailElements } from './js/detail.js';
 import { getAllCartElements } from './js/cart.js';
 import { getAllPaymentElements } from './js/payment.js';
+import { getAllProfileElements } from './js/profile.js';
 
 const container = document.querySelector('.container');
 const icons = document.querySelectorAll('.icon');
@@ -17,7 +18,8 @@ function fetching(name, options, options2) {
 				if (name === 'kerajinan') getAllKerajinanElements(name);
 				if (name === 'detail') getAllDetailElements(options);
 				if (name === 'cart') getAllCartElements(options);
-				if (name === 'payment') getAllPaymentElements(options, options2);
+            if (name === 'payment') getAllPaymentElements(options, options2);
+            if(name === 'profile') getAllProfileElements(options);
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
 			}
