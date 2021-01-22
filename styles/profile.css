@@ -37,3 +37,33 @@
     background-color: #4649a0;
     color: white;
 }
+
+.profile .menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile .menu .menu-one {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile .menu .menu-one .menu-item {
+    margin: 10px;
+    border-radius: 10px;
+    border: 1.5px solid #4649a0;
+    padding: 10px;
+    text-align: center;
+    transition: 1s;
+}
+
+.profile .menu .menu-one .menu-item:hover {
+    transform: scale(1.1);
+    transition: 1s;
+    background-color: #4649a0;
+    color: white;
+}
+
+.profile .menu .menu-one .menu-item img {
+    width: 100%;
+}
