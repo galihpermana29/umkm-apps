@@ -20,8 +20,8 @@ body {
 
 .container {
     /* border: 1px solid black; */
-    width: 90%;
-    margin: 20px auto;
+    width: 85%;
+    margin: 30px auto;
     /* position: relative; */
 }
 
@@ -127,6 +127,12 @@ a {
 
 .text-secondary {
     color: #B4B5D4;
+    margin-top: 10px;
+}
+
+.text-secondary h4 {
+   font-weight: 500;
+   letter-spacing: .5px;
 }
 
 .text-primary {
@@ -144,13 +150,16 @@ a {
     font-weight: bolder;
     font-size: 16px;
     color: #4649a0;
-    transition: 1s;
+    transition: .4s ease-in-out all;
     outline: none;
 }
 
 .btn-white:hover {
-    transition: 1s;
-    transform: scale(1.1);
+    /* transition: 1s; */
+    transform: scale(.95);
+    /* color: #6669cf; */
+    /* border: 1px solid #4649a0; */
+    /* background-color: rgb(219, 219, 219); */
 }
 
 .mt-20 {
@@ -172,11 +181,12 @@ a {
 }
 
 .second h2 {
-    margin: 20px 0px;
+    margin: 20px 0 0 0;
 }
 
 .second h3 {
-    margin: 30px 0px;
+    margin: 10px 0px 30px 0;
+    font-size: 16px;
 }
 
 .second .card {
@@ -185,7 +195,7 @@ a {
     background-color: white;
     position: absolute;
     bottom: 0;
-    border-radius: 30px 30px 0px 0px;
+    border-radius: 40px 40px 0px 0px;
 }
 
 
@@ -215,12 +225,19 @@ a {
     border-radius: 90px 90px 90px 90px;
     display: flex;
     margin: 20px 0px;
+    background-color: #fcfcfc;
+    /* border: 1px solid red; */
+}
+
+.second .form-group:focus {
+   /* border: 1px solid yellow; */
 }
 
 .second .form-group .icon {
     width: 20px;
     height: 20px;
     margin: auto 10px;
+    
 }
 
 .second .form-group input {
@@ -255,11 +272,12 @@ a {
     font-weight: bolder;
     font-size: 16px;
     color: #fff;
-    transition: 1s;
+    transition: .4s ease-in-out all;
     outline: none;
+    cursor: pointer;
 }
 
 .btn-primary:hover {
-    transition: 1s;
-    transform: scale(1.1);
+    /* transition: 1s; */
+    transform: scale(.95);
 }
