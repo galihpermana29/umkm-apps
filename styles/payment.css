@@ -1,11 +1,9 @@
 .paymentContainer {
    margin: 20px 0 30px 0;
-   /* border: 1px solid red; */
    padding: 0 15px;
 }
 
 .head {
-   /* border: 1px solid orange; */
    display: flex;
    justify-content: space-between;
 }

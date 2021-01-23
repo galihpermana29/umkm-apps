@@ -4,9 +4,9 @@ import { getAllDetailElements } from './js/detail.js';
 import { getAllCartElements } from './js/cart.js';
 import { getAllPaymentElements } from './js/payment.js';
 import { getAllPesananElements } from './js/pesanan.js';
+import { getAllProfileElements } from './js/profile.js';
+import { getAllInfoPesananElements } from './js/infoPesanan.js';
 // import { v4 as uuidv4 } from '../uuid';
-
-
 
 const container = document.querySelector('.container');
 const icons = document.querySelectorAll('.icon');
@@ -23,6 +23,9 @@ function fetching(name, options, options2) {
 				if (name === 'cart') getAllCartElements(options);
 				if (name === 'payment') getAllPaymentElements(options, options2);
 				if (name === 'pesanan') getAllPesananElements(options, options2);
+				if (name === 'profile') getAllProfileElements(options, options2);
+				if (name === 'infoPesanan')
+					getAllInfoPesananElements(options);
 			} else if (xhr.status !== 4) {
 				console.log('eror brou');
 			}
@@ -46,7 +49,6 @@ function fetching(name, options, options2) {
 	xhr.send();
 }
 
-
 function iconsOnClickAction() {
 	const icons = document.querySelectorAll('.icon');
 	icons.forEach((icon) => {
@@ -57,11 +59,7 @@ function iconsOnClickAction() {
 	});
 }
 
-
 fetching();
 iconsOnClickAction();
-
-
-
 
 export { fetching };

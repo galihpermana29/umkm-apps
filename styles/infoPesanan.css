@@ -1,0 +1,52 @@
+.infoPesananContainer {
+   margin: 20px 0 65px 0;
+   padding: 0 15px;
+}
+
+
+
+.infoPesananContainer .body .addressText {
+   display: inherit;
+}
+
+.statusEl {
+   margin-top: 20px;
+}
+
+.statusEl p{
+   margin-top: 15px;
+}
+
+
+/* button */
+.infoPesananButtonContainer {
+   margin: 50px 0;
+}
+
+.infoPesananButtonContainer .but {
+   border: 1px solid #4649a0;
+   margin-top: 15px;
+   padding: 10px;
+   text-align: center;
+   border-radius: 5px;
+   text-transform: uppercase;
+   font-weight: 600;
+   font-size: 13px;
+   transition: 0.5s ease-in-out all;
+   cursor: pointer;
+}
+
+.infoPesananButtonContainer .lacak {
+   background-color: #4649a0;
+   color: white;
+}
+
+.infoPesananButtonContainer .lacak:hover{
+   background-color: #383a80;
+}
+
+.totalPaymentEl {
+   margin-top: 20px;
+   display: flex;
+   justify-content: space-between;
+}
