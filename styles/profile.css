@@ -74,4 +74,5 @@
 .profile .menu .menu-one .menu-item img {
     width: 100%;
     min-width: 90px;
+    max-width: 150px;
 }
