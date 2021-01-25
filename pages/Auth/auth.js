@@ -48,7 +48,7 @@ masukButton.addEventListener('click', async function (e) {
 		} else if (data.phone === phone && data.password === password) {
          data.online = true;
          storeDataAuth(data)
-			window.location.pathname = '/index.html';
+			window.location.pathname = '/umkm-apps/';
 		}
 		return;
 	} else {
