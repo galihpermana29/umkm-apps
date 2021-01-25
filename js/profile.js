@@ -12,7 +12,7 @@ function getAllProfileElements() {
    function logoutPage(){
       const logoutEl = document.querySelector('.menu-one .keluar')
       logoutEl.addEventListener('click', e => {
-         window.location.href = 'umkm-apps/pages/Auth/'
+         window.location.href = '/pages/Auth/'
       })
    }
 	backButton.addEventListener('click', (e) => {
