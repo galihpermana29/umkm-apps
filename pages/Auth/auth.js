@@ -37,7 +37,6 @@ masukButton.addEventListener('click', async function (e) {
 		alert('Pastikan semua data terisi');
 		return;
 	}
-	console.log(phone);
 
 	let data = await readDataAuth(phone);
 	if (data !== undefined) {

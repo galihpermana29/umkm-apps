@@ -10,6 +10,7 @@ async function getAllInfoPesananElements(orderID) {
       let paymentEl = document.querySelector('.infoPesananContainer .paymentEl .opsi ul li p')
       let itemElContainer = document.querySelector('.infoPesananContainer .itemDescEl .opsi')
       let totalEl = document.querySelector('.totalPaymentEl p')
+      let lacakButton = document.querySelector('.lacak')
 
       addressEl.innerHTML = `${data.orderAddress}`
       shippingEl.innerHTML = `${data.orderShipping}`
@@ -24,11 +25,16 @@ async function getAllInfoPesananElements(orderID) {
             <p>Rp${item.itemPrice} <span>x${item.itemQuantity}</span></p>
          </div>`
       })
+
+      lacakButton.addEventListener('click', e => {
+         fetching('lacak')
+      })
    }
 
    backButton.addEventListener('click', e => {
       fetching('pesanan')
    })
+
    renderItemProp();
 }
 
