@@ -6,7 +6,6 @@ import { getAllPaymentElements } from './js/payment.js';
 import { getAllPesananElements } from './js/pesanan.js';
 import { getAllProfileElements } from './js/profile.js';
 import { getAllInfoPesananElements } from './js/infoPesanan.js';
-// import { v4 as uuidv4 } from '../uuid';
 
 
 const container = document.querySelector('.container');
