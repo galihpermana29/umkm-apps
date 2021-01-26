@@ -23,9 +23,35 @@ body {
 	color: #4649a0;
 }
 
+.mobile-view {
+	width: 400px;
+	height: 100%;
+	overflow: auto;
+	position: relative;
+	margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+
+	.mobile-view {
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		position: relative;
+		margin: auto;
+	}
+
+	nav {
+		right: 15px;
+		left: 15px;
+		padding: 0 5px;
+		width: auto !important;
+	}
+}
+
 .container {
 	width: 90%;
-   margin: 20px auto;
+	margin: 20px auto;
 }
 
 /* navbar */
@@ -35,16 +61,17 @@ nav {
 	display: grid;
 	position: fixed;
 	bottom: 5px;
-	right: 15px;
-	left: 15px;
-	padding: 0 5px;
+	/* right: 15px;
+	left: 15px; */
+	/* padding: 0 5px; */
 	height: 51px;
 	grid-template-columns: repeat(4, minmax(50px, 60px));
 	justify-content: space-between;
 	justify-items: center;
 	align-items: center;
-   border-radius: 30px;
-   z-index: 2;
+	border-radius: 30px;
+	z-index: 2;
+	width: 400px;
 
 }
 
