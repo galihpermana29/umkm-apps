@@ -1,78 +1,109 @@
 .pesananEl {
-   position: relative;
+	position: relative;
 }
 
 .pesananContainer {
-   display: grid;
-   justify-items: center;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-column-align: center;
+	justify-items: center;
 }
 
 .pesananItem {
-   display: grid;
-   grid-template-columns: 70px auto 90px;
-   grid-template-rows: 70px;
-   margin: 20px 0 0 0;
-   padding: 10px 10px;
-   border-radius: 10px;
-   align-items: center;
-   width: 260px;
-   align-content: center;
-   position: relative;
-   border: 1px solid #4649a0;
-   transition: .3s ease all;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: 70px auto 90px;
+	grid-template-columns: 70px auto 90px;
+	-ms-grid-rows: 70px;
+	grid-template-rows: 70px;
+	margin: 20px 0 0 0;
+	padding: 10px 10px;
+	border-radius: 10px;
+	-ms-grid-row-align: center;
+	align-items: center;
+	width: 260px;
+	-ms-flex-line-pack: center;
+	align-content: center;
+	position: relative;
+	border: 1px solid #4649a0;
+	-webkit-transition: 0.3s ease all;
+	transition: 0.3s ease all;
 }
 
 .pesananItem:hover {
-   cursor: pointer;
-   transform: scale(1.05);
-   box-shadow: 0px 3px 5px rgba(144, 142, 255, 0.925);
+	cursor: pointer;
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+	box-shadow: 0px 3px 5px rgba(144, 142, 255, 0.925);
 }
 
 .pesananItemImg img {
-   width: 80%;
-   /* background-color: red; */
+	width: 80%;
+	/* background-color: red; */
 }
 
 .pesananItemImg {
-   display: grid;
-   justify-items: center;
-   align-items: center;
-   background-color: #F8F8F8;
-   border-radius: 10px;
-   box-sizing: border-box;
-   padding: 5px;
-   width: 66px;
-   height: 66px;
-   
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-column-align: center;
+	justify-items: center;
+	-ms-grid-row-align: center;
+	align-items: center;
+	background-color: #f8f8f8;
+	border-radius: 10px;
+	box-sizing: border-box;
+	padding: 5px;
+	width: 66px;
+	height: 66px;
 }
 
 .pesananItemImg img {
-   /* transition: .5s ease-in-out all; */
-   animation: boxAnimate 1s ease-in-out ;
+	/* transition: .5s ease-in-out all; */
+	-webkit-animation: boxAnimate 1s ease-in-out;
+	animation: boxAnimate 1s ease-in-out;
 }
-
 
 .pesananItemNamePrice {
-   padding-left: 15px;
-   width: max-content;
+	padding-left: 15px;
+	width: -webkit-max-content;
+	width: -moz-max-content;
+	width: max-content;
 }
 
-.pesananItemNamePrice h2{
-   font-size: 1em;
-   margin-bottom: 5px;
+.pesananItemNamePrice h2 {
+	font-size: 1em;
+	margin-bottom: 5px;
 }
-.pesananItemNamePrice h4{
-   font-weight: 400;
+.pesananItemNamePrice h4 {
+	font-weight: 400;
+}
+
+@-webkit-keyframes boxAnimate {
+	0% {
+		-webkit-transform: translateY(0px);
+		transform: translateY(0px);
+	}
+	50% {
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+	100% {
+		-webkit-transform: translateY(0px);
+		transform: translateY(0px);
+	}
 }
 
 @keyframes boxAnimate {
-   0% {
-      transform: translateY(0px) ;
-   }
-   50% {
-      transform: translateY(-20px) ;
-   }
-   100% {
-      transform: translateY(0px) ;;
-   }
+	0% {
+		-webkit-transform: translateY(0px);
+		transform: translateY(0px);
+	}
+	50% {
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+	100% {
+		-webkit-transform: translateY(0px);
+		transform: translateY(0px);
+	}
 }

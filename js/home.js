@@ -11,7 +11,9 @@ function getAllHomeElements(name) {
 				fetching(nameCard);
 			});
 		});
-	}
+   }
+   
+   
 
 	fetchCategoryShopPage();
 }

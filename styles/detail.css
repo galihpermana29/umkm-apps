@@ -3,6 +3,7 @@
 }
 
 .pageId {
+	display: -ms-grid;
 	display: grid;
 	/* grid-template-columns: repeat(3, max-content); */
 	/* border: 1px solid red; */
@@ -41,6 +42,7 @@
 }
 
 .itemDetailEl {
+	display: -ms-grid;
 	display: grid;
 	margin: 20px 0 80px 0;
 	grid-template-areas:
@@ -61,15 +63,27 @@
 	grid-area: detailImg;
 	background-color: #f8f8f8;
 	height: 300px;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }
 
 .itemDetailEl .detailNamePrice {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
 }
 
 .itemDetailEl .detailNamePrice h2 {
@@ -82,8 +96,10 @@
 }
 
 .itemDetailEl .detailRating {
+	display: -ms-grid;
 	display: grid;
-	grid-template-columns: repeat(6, max-content);
+	-ms-grid-columns: (max-content);
+	    grid-template-columns: repeat(6, max-content);
 	/* border: 1px solid red; */
 	gap: 5px;
 }
@@ -95,11 +111,15 @@
 }
 
 .itemDetailEl .detailAddToCart {
+	display: -ms-grid;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	-ms-grid-columns: (minmax(120px, 1fr))[auto-fit];
+	    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 	/* border: 1px solid red; */
-	align-items: center;
-	justify-items: center;
+	-ms-grid-row-align: center;
+	    align-items: center;
+	-ms-grid-column-align: center;
+	    justify-items: center;
 	border-radius: 5px;
 	margin: 10px 0;
 	gap: 5px;
@@ -125,11 +145,17 @@ input[type='number'] {
 }
 
 .detailAddToCart .quantity {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	/* border: 1px solid red; */
 	/* width: 100%; */
-	justify-content: center;
-	align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }
 
 .detailAddToCart .quantity .qButton {
@@ -139,10 +165,17 @@ input[type='number'] {
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.1);
+	-webkit-transition: 0.3s ease-in-out all;
 	transition: 0.3s ease-in-out all;
 	cursor: pointer;
 }
@@ -159,10 +192,17 @@ input[type='number'] {
 	cursor: pointer;
 	text-transform: uppercase;
 	font-size: 12px;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	width: 80%;
-	justify-content: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-transition: 0.3s ease-in-out all;
 	transition: 0.3s ease-in-out all;
 }
 
@@ -183,19 +223,27 @@ input[type='number'] {
    max-width: 220px;
    min-width: 200px;
    position: fixed;
+   top: 72px;
    top: 4.5rem;
 	left: 50%;
-	transform: translateX(-50%) translateY(-500%);
+	-webkit-transform: translateX(-50%) translateY(-500%);
+	        transform: translateX(-50%) translateY(-500%);
+	display: -ms-grid;
 	display: grid;
-	grid-template-columns: 27% auto;
+	-ms-grid-columns: 27% auto;
+	    grid-template-columns: 27% auto;
 	padding: 10px;
 	border-radius: 10px;
 	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 	gap: 12px;
 	/* justify-items: ; */
-	align-items: center;
-	justify-content: space-between;
+	-ms-grid-row-align: center;
+	    align-items: center;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
    z-index: 3;
+   -webkit-transition: 1s ease-in-out all;
    transition: 1s ease-in-out all;
 }
 
@@ -203,7 +251,8 @@ input[type='number'] {
    /* top: 30px; */
 	/* left: 50px; */
    /* right: 50px; */
-   transform: translateX(-50%) translateY(0);
+   -webkit-transform: translateX(-50%) translateY(0);
+           transform: translateX(-50%) translateY(0);
    overflow: hidden;
 }
 

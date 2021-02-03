@@ -59,14 +59,21 @@ input:focus {
 	width: 36px;
 	height: 36px;
 	border-radius: 50%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 	position: absolute;
 	top: 4px;
 	right: 11px;
 	bottom: 5px;
 	cursor: pointer;
+	-webkit-transition: 0.5s ease all;
 	transition: 0.5s ease all;
 }
 
@@ -86,7 +93,9 @@ input:focus {
 	/* width: 100%; */
 	/* height: 100px; */
 	margin: 100px 0 65px 0;
+	display: -ms-grid;
 	display: grid;
+	-ms-grid-columns: (minmax(140px, 1fr)) [auto-fit];
 	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 	gap: 30px;
 	color: #4649a0;
@@ -106,10 +115,11 @@ input:focus {
 	text-align: center;
 	height: 200px;
 	cursor: pointer;
+	-webkit-transition: 0.3s ease all;
 	transition: 0.3s ease all;
 	/* border: 1px solid red; */
-   position: relative;
-   z-index: 0;
+	position: relative;
+	z-index: 0;
 }
 
 .cards:hover {
@@ -117,10 +127,13 @@ input:focus {
 }
 
 .cardItems {
-   display: grid;
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-rows: 140px 80px;
 	grid-template-rows: 140px 80px;
-   align-items: center;
-   /* background-color: red; */
+	-ms-grid-row-align: center;
+	align-items: center;
+	/* background-color: red; */
 }
 
 .cardItems .itemName {
@@ -138,15 +151,37 @@ input:focus {
 	right: 12px;
 	fill: #a8a8a8;
 	cursor: pointer;
-   transition: 0.5s ease all;
-   z-index: 1;
+	-webkit-transition: 0.5s ease all;
+	transition: 0.5s ease all;
+	z-index: 1;
 }
 
 .cards svg.fav {
-   fill: #4649a0;
-   animation: love-animation 1s ease-in-out forwards;
+	fill: #4649a0;
+	-webkit-animation: love-animation 1s ease-in-out forwards;
+	animation: love-animation 1s ease-in-out forwards;
 	/* top: 8px;
 	transform: scale(1.2); */
+}
+
+@-webkit-keyframes love-animation {
+	0% {
+		top: 12px;
+		right: 12px;
+	}
+
+	50% {
+		top: 8px;
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+
+	100% {
+		top: 12px;
+		right: 12px;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
 }
 
 @keyframes love-animation {
@@ -157,12 +192,14 @@ input:focus {
 
 	50% {
 		top: 8px;
+		-webkit-transform: scale(1.2);
 		transform: scale(1.2);
-   }
+	}
 
-   100% {
-      top: 12px;
-      right: 12px;
-      transform: scale(1);
-   }
+	100% {
+		top: 12px;
+		right: 12px;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
 }

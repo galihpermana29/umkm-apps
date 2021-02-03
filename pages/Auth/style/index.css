@@ -15,9 +15,15 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 
@@ -33,6 +39,7 @@ body {
 
 nav {
     background-color: #4649a0;
+    display: -ms-grid;
     display: grid;
     position: fixed;
     /* top: 0; */
@@ -41,10 +48,15 @@ nav {
     left: 15px;
     padding: 0 5px;
     height: 51px;
-    grid-template-columns: repeat(4, minmax(50px, 60px));
-    justify-content: space-between;
-    justify-items: center;
-    align-items: center;
+    -ms-grid-columns: (minmax(50px, 60px));
+        grid-template-columns: repeat(4, minmax(50px, 60px));
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-grid-column-align: center;
+        justify-items: center;
+    -ms-grid-row-align: center;
+        align-items: center;
     /* border-top-left-radius: 5px;
    border-top-right-radius: 5px; */
     border-radius: 30px;
@@ -55,6 +67,7 @@ nav svg {
     color: #9394d6;
     /* background-color: red; */
     /* fill: none; */
+    -webkit-transition: 0.3s ease all;
     transition: 0.3s ease all;
 }
 
@@ -66,7 +79,6 @@ a {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -99,9 +111,15 @@ a {
 }
 
 .auth-index {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     width: 100%;
     height: 100%;
     color: white;
@@ -111,36 +129,42 @@ a {
 .first {
     position: absolute;
     bottom: 1000px;
+    -webkit-transition: 1s;
     transition: 1s;
 }
 
 .first.is-active {
     position: absolute;
     top: 25vh;
+    -webkit-transition: 1s;
     transition: 1s;
 }
 
 .second {
     position: absolute;
     top: 1000px;
+    -webkit-transition: 1s;
     transition: 1s;
 }
 
 .second.is-active {
     position: absolute;
     top: 0;
+    -webkit-transition: 1s;
     transition: 1s;
 }
 
 .thirt {
     position: absolute;
     top: 1000px;
+    -webkit-transition: 1s;
     transition: 1s;
 }
 
 .thirt.is-active {
     position: absolute;
     top: 0;
+    -webkit-transition: 1s;
     transition: 1s;
 }
 
@@ -173,13 +197,15 @@ a {
     font-weight: bolder;
     font-size: 16px;
     color: #4649a0;
+    -webkit-transition: .4s ease-in-out all;
     transition: .4s ease-in-out all;
     outline: none;
 }
 
 .btn-white:hover {
     /* transition: 1s; */
-    transform: scale(.95);
+    -webkit-transform: scale(.95);
+            transform: scale(.95);
     /* color: #6669cf; */
     /* border: 1px solid #4649a0; */
     /* background-color: rgb(219, 219, 219); */
@@ -224,8 +250,12 @@ a {
 
 .second .icon {
     margin: 10px 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
 }
 
 .second .icon-item {
@@ -246,15 +276,15 @@ a {
     padding: 10px 30px;
     padding-right: 0px;
     border-radius: 90px 90px 90px 90px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: 20px 0px;
     background-color: #fcfcfc;
     /* border: 1px solid red; */
 }
 
-.second .form-group:focus {
-    /* border: 1px solid yellow; */
-}
+
 
 .second .form-group .icon {
     width: 20px;
@@ -295,6 +325,7 @@ a {
     font-weight: bolder;
     font-size: 16px;
     color: #fff;
+    -webkit-transition: .4s ease-in-out all;
     transition: .4s ease-in-out all;
     outline: none;
     cursor: pointer;
@@ -302,5 +333,6 @@ a {
 
 .btn-primary:hover {
     /* transition: 1s; */
-    transform: scale(.95);
+    -webkit-transform: scale(.95);
+            transform: scale(.95);
 }
